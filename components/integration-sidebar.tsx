@@ -40,6 +40,7 @@ import {
 	PanelRight,
 	Plus,
 	Settings,
+	Merge,
 	X,
 } from "lucide-react";
 import Link from "next/link";
@@ -224,7 +225,7 @@ export function MinimalIntegrationSidebar({ documents = [] as Document[] }) {
 										</SidebarMenuButton>
 									</CollapsibleTrigger>
 									<CollapsibleContent>
-										<ScrollArea className="h-96">
+										<ScrollArea className="max-h-70 h-auto">
 											<div className="space-y-1">
 												<div className="sticky ml-4 top-0 border-border border-l border-dashed px-2 group-data-[collapsible=icon]:ml-0 group-data-[collapsible=icon]:px-0">
 													{isCreatingDoc ? (
@@ -370,13 +371,14 @@ export function MinimalIntegrationSidebar({ documents = [] as Document[] }) {
 													)}
 												</div>
 											))}
-											<div className="px-1">
+											<div>
 												<SidebarMenuButton
 													asChild
 													tooltip="View all integrations"
 													className="flex w-full items-center gap-2 rounded-lg px-2 py-1.5 font-medium text-primary brightness-150 text-sm hover:bg-muted group-data-[collapsible=icon]:justify-center"
 												>
 													<Link href="/integrations">
+													<Merge className="h-4 w-4 shrink-0" />
 														<span className="truncate group-data-[collapsible=icon]:hidden">
 															View all integrations
 														</span>
