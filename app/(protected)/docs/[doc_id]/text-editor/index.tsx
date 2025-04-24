@@ -146,6 +146,10 @@ export function TextEditor({
 
 	// Handle zen mode toggle with keyboard shortcut
 	React.useEffect(() => {
+		const handleFullScreenChange = () => {
+			if (isZenMode && !document.fullscreenElement) setIsZenMode(false);
+		}
+		
 		const handleKeyPress = (e: KeyboardEvent) => {
 			if (e.key === "j" && (e.metaKey || e.ctrlKey)) {
 				e.preventDefault();
@@ -166,7 +170,11 @@ export function TextEditor({
 		};
 
 		window.addEventListener("keydown", handleKeyPress);
-		return () => window.removeEventListener("keydown", handleKeyPress);
+		window.addEventListener("fullscreenchange", handleFullScreenChange);
+		return () => {
+			window.removeEventListener("keydown", handleKeyPress);
+			window.removeEventListener("fullscreenchange", handleFullScreenChange);
+		};
 	}, [isZenMode]);
 
 	const handleKeyDown = (e: React.KeyboardEvent) => {
