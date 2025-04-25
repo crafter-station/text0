@@ -24,7 +24,6 @@ import { TextToSpeech } from "./text-to-speech";
 import Image from "next/image";
 import { TOUR_STEP_IDS } from "@/lib/tour-constants";
 import { DocTour } from "../tour";
-import { SidebarTrigger } from "@/components/ui/sidebar";
 
 interface TextEditorProps {
 	initialContent: string;
@@ -147,6 +146,10 @@ export function TextEditor({
 
 	// Handle zen mode toggle with keyboard shortcut
 	React.useEffect(() => {
+		const handleFullScreenChange = () => {
+			if (isZenMode && !document.fullscreenElement) setIsZenMode(false);
+		}
+		
 		const handleKeyPress = (e: KeyboardEvent) => {
 			if (e.key === "j" && (e.metaKey || e.ctrlKey)) {
 				e.preventDefault();
@@ -167,7 +170,11 @@ export function TextEditor({
 		};
 
 		window.addEventListener("keydown", handleKeyPress);
-		return () => window.removeEventListener("keydown", handleKeyPress);
+		window.addEventListener("fullscreenchange", handleFullScreenChange);
+		return () => {
+			window.removeEventListener("keydown", handleKeyPress);
+			window.removeEventListener("fullscreenchange", handleFullScreenChange);
+		};
 	}, [isZenMode]);
 
 	const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -436,7 +443,6 @@ export function TextEditor({
 
 	return (
 		<div className="relative flex h-full w-full bg-background">
-			<SidebarTrigger />
 			<DocTour />
 			{/* Background Image */}
 			<Image
@@ -525,7 +531,7 @@ export function TextEditor({
 												? "px-4 leading-relaxed opacity-30"
 												: "w-full px-8 text-base opacity-50",
 											isModifying &&
-												"after:absolute after:inset-0 after:animate-shine after:bg-gradient-to-r after:from-transparent after:via-primary/10 after:to-transparent",
+											"after:absolute after:inset-0 after:animate-shine after:bg-gradient-to-r after:from-transparent after:via-primary/10 after:to-transparent",
 										)}
 									>
 										<span className="whitespace-pre-wrap">

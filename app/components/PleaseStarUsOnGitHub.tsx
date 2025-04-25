@@ -11,7 +11,7 @@ import { T0Logo } from "@/components/ui/icons/t0-logo";
 import { GithubIcon } from "@/components/ui/icons/github";
 import { XIcon } from "@/components/ui/icons/x-icon";
 
-const LOCAL_STORAGE_KEY = "text0-github-star-shown";
+const LOCAL_STORAGE_KEY = "text0-github-modal-shown";
 
 export function PleaseStarUsOnGitHub() {
   const [isHovered, setIsHovered] = useState(false);
@@ -136,7 +136,7 @@ export function PleaseStarUsOnGitHub() {
         </div>
 
         <motion.a
-          href="https://github.com/raidendotai/text0"
+          href="https://github.com/crafter-station/text0"
           target="_blank"
           rel="noopener noreferrer"
           onClick={handleStarClick}
@@ -202,7 +202,7 @@ export function PleaseStarUsOnGitHub() {
               rel="noopener noreferrer"
               className="hover:text-foreground"
             >
-              Cueva
+              Anthony
             </a>
           </div>
           <div className="flex items-center gap-4">

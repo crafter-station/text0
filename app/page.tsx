@@ -106,7 +106,7 @@ export default async function LandingPage() {
 							rel="noopener noreferrer"
 							className="hover:text-foreground"
 						>
-							Cueva
+							Anthony
 						</a>
 					</div>
 				</div>
