@@ -1,16 +1,16 @@
 "use server";
 
 import { getSecureSession } from "@/lib/auth/server";
+import { nanoid } from "@/lib/nanoid";
 import { redis } from "@/lib/redis";
 import type { Reference } from "@/lib/redis";
 import type { ActionState } from "@/lib/utils";
 import type { processReferenceTask } from "@/trigger/process-document";
+import { openai } from "@ai-sdk/openai";
 import { tasks } from "@trigger.dev/sdk/v3";
-import { nanoid } from "@/lib/nanoid";
+import { generateText } from "ai";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { openai } from "@ai-sdk/openai";
-import { generateText } from "ai";
 
 const USER_REFERENCES_KEY = (userId: string) => `user:${userId}:references`;
 const REFERENCE_KEY = (referenceId: string) => `reference:${referenceId}`;

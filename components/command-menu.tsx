@@ -21,6 +21,7 @@ import { MsTeamsIcon } from "@/components/ui/icons/ms-teams";
 import { NotionIcon } from "@/components/ui/icons/notion";
 import { SlackIcon } from "@/components/ui/icons/slack";
 import { SidebarMenuButton } from "@/components/ui/sidebar";
+import { cn } from "@/lib/utils";
 import {
 	ArrowUp,
 	FileText,
@@ -32,7 +33,6 @@ import {
 import { useRouter } from "next/navigation";
 import * as React from "react";
 import { useState } from "react";
-import { cn } from "@/lib/utils";
 
 interface Document {
 	id: string;
@@ -129,7 +129,7 @@ export function CommandMenu({
 							Search or press
 						</span>
 					</span>
-					<kbd className="pointer-events-none h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-medium font-mono text-[10px] text-foreground sm:flex group-data-[collapsible=icon]:hidden">
+					<kbd className="pointer-events-none h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-medium font-mono text-[10px] text-foreground group-data-[collapsible=icon]:hidden sm:flex">
 						<span className="text-xs">⌘</span>K
 					</kbd>
 				</span>

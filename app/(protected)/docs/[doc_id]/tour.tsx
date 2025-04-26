@@ -1,12 +1,12 @@
 "use client";
 
+import { TextSelectionMenu } from "@/components/text-selection-menu";
 import { TourAlertDialog, useTour } from "@/components/tour";
+import type { TourStep } from "@/components/tour";
 import { TOUR_STEP_IDS } from "@/lib/tour-constants";
+import { Check, Coffee, Sparkles, Volume2, Wand2 } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import type { TourStep } from "@/components/tour";
-import { Wand2, Sparkles, Check, Volume2, Coffee } from "lucide-react";
-import { TextSelectionMenu } from "@/components/text-selection-menu";
 
 const DOC_TOUR_STEPS: TourStep[] = [
 	{
@@ -18,22 +18,22 @@ const DOC_TOUR_STEPS: TourStep[] = [
 					content.
 				</p>
 				<div className="mt-3 rounded-md border bg-muted/50 p-3">
-					<div className="flex items-center gap-2 mb-2">
+					<div className="mb-2 flex items-center gap-2">
 						<Wand2 className="h-4 w-4 text-primary" />
 						<span className="font-medium text-sm">Text Selection Magic</span>
 					</div>
-					<p className="text-sm text-muted-foreground mb-3">
+					<p className="mb-3 text-muted-foreground text-sm">
 						Select any text in your document to reveal this powerful enhancement
 						menu:
 					</p>
-					<div className="relative flex justify-center p-2 bg-background/80 rounded border overflow-visible">
+					<div className="relative flex justify-center overflow-visible rounded border bg-background/80 p-2">
 						<div className="demo-menu-wrapper">
 							{/* Mock selected text with styling */}
-							<div className="px-3 py-1 bg-primary/50 text-sm rounded">
+							<div className="rounded bg-primary/50 px-3 py-1 text-sm">
 								Example selected text
 							</div>
 							{/* Key features highlight */}
-							<div className="absolute right-0 top-[45px] z-20 w-[220px] rounded-md border bg-popover p-2 text-xs shadow-md animate-in fade-in">
+							<div className="fade-in absolute top-[45px] right-0 z-20 w-[220px] animate-in rounded-md border bg-popover p-2 text-xs shadow-md">
 								<div className="flex items-center gap-1.5 px-2 py-1.5 text-foreground">
 									<Sparkles className="h-3.5 w-3.5 text-primary" />
 									<span>Improve writing</span>
@@ -55,14 +55,14 @@ const DOC_TOUR_STEPS: TourStep[] = [
 							/>
 						</div>
 					</div>
-					<p className="text-xs text-muted-foreground mt-3 flex flex-col gap-1">
+					<p className="mt-3 flex flex-col gap-1 text-muted-foreground text-xs">
 						<span>
 							• Quickly improve writing, fix grammar, adjust tone, and more
 						</span>
 						<span>
-							• Use <kbd className="px-1 py-0.5 rounded bg-muted">⌘I</kbd> to
+							• Use <kbd className="rounded bg-muted px-1 py-0.5">⌘I</kbd> to
 							improve text,{" "}
-							<kbd className="px-1 py-0.5 rounded bg-muted">⌘G</kbd> for grammar
+							<kbd className="rounded bg-muted px-1 py-0.5">⌘G</kbd> for grammar
 							fixes
 						</span>
 					</p>

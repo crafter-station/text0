@@ -2,12 +2,12 @@ import { getSecureSession } from "@/lib/auth/server";
 import { nanoid } from "@/lib/nanoid";
 import {
 	REFERENCE_KEY,
-	USER_REFERENCES_KEY,
 	type Reference,
+	USER_REFERENCES_KEY,
 	redis,
 } from "@/lib/redis";
 import { vector } from "@/lib/vector";
-import { createClerkClient, type OauthAccessToken } from "@clerk/backend";
+import { type OauthAccessToken, createClerkClient } from "@clerk/backend";
 import { ClerkAPIResponseError } from "@clerk/shared";
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 import { NextResponse } from "next/server";

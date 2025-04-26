@@ -1,14 +1,14 @@
 "use client";
 
-import { Volume2, Loader2 } from "lucide-react";
-import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
 import { textToSpeech } from "@/app/actions/textToSpeech";
+import { Button } from "@/components/ui/button";
 import {
 	Tooltip,
-	TooltipTrigger,
 	TooltipContent,
+	TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { Loader2, Volume2 } from "lucide-react";
+import { useEffect, useState } from "react";
 
 interface TextToSpeechProps {
 	selectedText: string;

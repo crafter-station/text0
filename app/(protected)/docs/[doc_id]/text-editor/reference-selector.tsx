@@ -6,13 +6,13 @@ import { Progress } from "@/components/ui/progress";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
-import { useReferences } from "@/hooks/use-references";
 import { useReferenceProcessing } from "@/hooks/use-reference-processing";
+import { useReferences } from "@/hooks/use-references";
 import { useSelectedReferences } from "@/hooks/use-selected-references";
 import type { Reference } from "@/lib/redis";
 import { AlertCircle, CheckCircle, ExternalLink, Loader2 } from "lucide-react";
 import { useParams } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 export function ReferenceSelector() {
@@ -93,7 +93,7 @@ export function ReferenceSelector() {
 
 	return (
 		<ScrollArea className="h-[250px] bg-background/50">
-			<Table className="table-fixed w-full">
+			<Table className="w-full table-fixed">
 				<TableBody>
 					{(references ?? []).map((reference: Reference) => {
 						const processing = processingStatus[reference.id];
@@ -104,9 +104,9 @@ export function ReferenceSelector() {
 						return (
 							<TableRow
 								key={reference.id}
-								className={`transition-colors border-b border-border/20 last:border-b-0 group ${
+								className={`group border-border/20 border-b transition-colors last:border-b-0 ${
 									recentlyAdded.includes(reference.id)
-										? "bg-primary/5 animate-pulse"
+										? "animate-pulse bg-primary/5"
 										: "hover:bg-accent/30"
 								}`}
 							>
@@ -116,10 +116,10 @@ export function ReferenceSelector() {
 										checked={isReferenceSelected(reference.id)}
 										onCheckedChange={() => toggleReference(reference.id)}
 										disabled={isProcessing}
-										className="data-[state=checked]:bg-primary/90 data-[state=checked]:text-primary-foreground mt-0.5"
+										className="mt-0.5 data-[state=checked]:bg-primary/90 data-[state=checked]:text-primary-foreground"
 									/>
 								</TableCell>
-								<TableCell className="p-2 min-w-0">
+								<TableCell className="min-w-0 p-2">
 									<div className="flex items-center">
 										<label
 											htmlFor={reference.id}
@@ -138,16 +138,16 @@ export function ReferenceSelector() {
 									{/* Processing indicator */}
 									{isProcessing && (
 										<div className="mt-1">
-											<div className="flex items-center text-xs text-muted-foreground">
-												<Loader2 className="h-3 w-3 mr-1.5 animate-spin" />
-												<span className="text-[10px] font-medium uppercase tracking-wide opacity-80">
+											<div className="flex items-center text-muted-foreground text-xs">
+												<Loader2 className="mr-1.5 h-3 w-3 animate-spin" />
+												<span className="font-medium text-[10px] uppercase tracking-wide opacity-80">
 													{processing.status || "Processing..."}
 												</span>
 											</div>
 											{typeof progress === "number" && (
 												<Progress
 													value={progress}
-													className="h-1 mt-1.5"
+													className="mt-1.5 h-1"
 													aria-label="Processing progress"
 												/>
 											)}
@@ -156,9 +156,9 @@ export function ReferenceSelector() {
 
 									{/* Error indicator */}
 									{hasError && (
-										<div className="mt-1 flex items-center text-xs text-destructive">
-											<AlertCircle className="h-3 w-3 mr-1.5" />
-											<span className="text-[10px] font-medium">
+										<div className="mt-1 flex items-center text-destructive text-xs">
+											<AlertCircle className="mr-1.5 h-3 w-3" />
+											<span className="font-medium text-[10px]">
 												{processing.error}
 											</span>
 										</div>
@@ -166,9 +166,9 @@ export function ReferenceSelector() {
 
 									{/* Completed indicator */}
 									{!isProcessing && !hasError && processing && (
-										<div className="mt-1 flex items-center text-xs text-primary">
-											<CheckCircle className="h-3 w-3 mr-1.5" />
-											<span className="text-[10px] font-medium uppercase tracking-wide">
+										<div className="mt-1 flex items-center text-primary text-xs">
+											<CheckCircle className="mr-1.5 h-3 w-3" />
+											<span className="font-medium text-[10px] uppercase tracking-wide">
 												Processing complete
 											</span>
 										</div>
@@ -198,7 +198,7 @@ export function ReferenceSelector() {
 								</TableCell>
 								{recentlyAdded.includes(reference.id) && (
 									<TableCell className="w-12 p-2 align-middle">
-										<span className="text-[10px] text-primary font-semibold flex items-center uppercase tracking-wider">
+										<span className="flex items-center font-semibold text-[10px] text-primary uppercase tracking-wider">
 											new
 										</span>
 									</TableCell>
@@ -209,11 +209,11 @@ export function ReferenceSelector() {
 				</TableBody>
 			</Table>
 			{(references || [])?.length === 0 && (
-				<div className="flex flex-col items-center justify-center h-full py-8 px-4">
-					<p className="text-center text-muted-foreground text-xs mb-1">
+				<div className="flex h-full flex-col items-center justify-center px-4 py-8">
+					<p className="mb-1 text-center text-muted-foreground text-xs">
 						No references available
 					</p>
-					<p className="text-center text-muted-foreground/70 text-[10px]">
+					<p className="text-center text-[10px] text-muted-foreground/70">
 						Add references to enhance AI responses
 					</p>
 				</div>

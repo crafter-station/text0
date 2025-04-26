@@ -28,6 +28,7 @@ import {
 	SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { TOUR_STEP_IDS } from "@/lib/tour-constants";
 import { cn } from "@/lib/utils";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import {
@@ -37,10 +38,10 @@ import {
 	FolderOpen,
 	LayoutGrid,
 	LogIn,
+	Merge,
 	PanelRight,
 	Plus,
 	Settings,
-	Merge,
 	X,
 } from "lucide-react";
 import Link from "next/link";
@@ -51,7 +52,6 @@ import { toast } from "sonner";
 import { CommandMenu } from "./command-menu";
 import { Input } from "./ui/input";
 import { ScrollArea } from "./ui/scroll-area";
-import { TOUR_STEP_IDS } from "@/lib/tour-constants";
 
 interface Document {
 	id: string;
@@ -181,7 +181,7 @@ export function MinimalIntegrationSidebar({ documents = [] as Document[] }) {
 									}
 								}}
 								variant="default"
-								className="w-full group-data-[collapsible=icon]:variant-icon"
+								className="group-data-[collapsible=icon]:variant-icon w-full"
 							/>
 						</div>
 					</SidebarGroup>
@@ -225,9 +225,9 @@ export function MinimalIntegrationSidebar({ documents = [] as Document[] }) {
 										</SidebarMenuButton>
 									</CollapsibleTrigger>
 									<CollapsibleContent>
-										<ScrollArea className="max-h-70 h-auto">
+										<ScrollArea className="h-auto max-h-70">
 											<div className="space-y-1">
-												<div className="sticky ml-4 top-0 border-border border-l border-dashed px-2 group-data-[collapsible=icon]:ml-0 group-data-[collapsible=icon]:px-0">
+												<div className="sticky top-0 ml-4 border-border border-l border-dashed px-2 group-data-[collapsible=icon]:ml-0 group-data-[collapsible=icon]:px-0">
 													{isCreatingDoc ? (
 														<form
 															action={formAction}
@@ -288,7 +288,7 @@ export function MinimalIntegrationSidebar({ documents = [] as Document[] }) {
 															variant="outline"
 															size="sm"
 															tooltip="New Document"
-															className="flex bg-background dark:bg-muted border border-border h-8 w-full items-center justify-start gap-2 pl-2 text-sm group-data-[collapsible=icon]:size-8 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:pr-0 group-data-[collapsible=icon]:pl-0"
+															className="flex h-8 w-full items-center justify-start gap-2 border border-border bg-background pl-2 text-sm group-data-[collapsible=icon]:size-8 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:pr-0 group-data-[collapsible=icon]:pl-0 dark:bg-muted"
 															onClick={() => setIsCreatingDoc(true)}
 															data-new-doc-trigger
 														>
@@ -375,10 +375,10 @@ export function MinimalIntegrationSidebar({ documents = [] as Document[] }) {
 												<SidebarMenuButton
 													asChild
 													tooltip="View all integrations"
-													className="flex w-full items-center gap-2 rounded-lg px-2 py-1.5 font-medium text-primary brightness-150 text-sm hover:bg-muted group-data-[collapsible=icon]:justify-center"
+													className="flex w-full items-center gap-2 rounded-lg px-2 py-1.5 font-medium text-primary text-sm brightness-150 hover:bg-muted group-data-[collapsible=icon]:justify-center"
 												>
 													<Link href="/integrations">
-													<Merge className="h-4 w-4 shrink-0" />
+														<Merge className="h-4 w-4 shrink-0" />
 														<span className="truncate group-data-[collapsible=icon]:hidden">
 															View all integrations
 														</span>
@@ -398,7 +398,7 @@ export function MinimalIntegrationSidebar({ documents = [] as Document[] }) {
 							<SidebarMenuItem>
 								<SignedIn>
 									<SidebarMenuButton
-										className="flex w-full items-center justify-start gap-2 !p-0 group-data-[collapsible=icon]:!p-0 text-sm text-foreground hover:bg-muted/50 transition-colors"
+										className="!p-0 group-data-[collapsible=icon]:!p-0 flex w-full items-center justify-start gap-2 text-foreground text-sm transition-colors hover:bg-muted/50"
 										tooltip="User Profile"
 										asChild
 									>
@@ -409,9 +409,9 @@ export function MinimalIntegrationSidebar({ documents = [] as Document[] }) {
 									<SignInButton mode="modal">
 										<SidebarMenuButton
 											className={cn(
-												"h-10 flex w-full items-center justify-center gap-1.5 px-2 py-1 rounded-sm text-base font-medium transition-colors duration-150",
-												"bg-sidebar-accent text-foreground hover:bg-sidebar-accent/80 hover:text-foreground active:!bg-sidebar-accent/60 active:!text-foreground",
-												"group-data-[collapsible=icon]:p-1 group-data-[collapsible=icon]:text-[10px] group-data-[collapsible=icon]:justify-center",
+												"flex h-10 w-full items-center justify-center gap-1.5 rounded-sm px-2 py-1 font-medium text-base transition-colors duration-150",
+												"active:!bg-sidebar-accent/60 active:!text-foreground bg-sidebar-accent text-foreground hover:bg-sidebar-accent/80 hover:text-foreground",
+												"group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:p-1 group-data-[collapsible=icon]:text-[10px]",
 												"aria-label:Sign in to your account",
 											)}
 										>

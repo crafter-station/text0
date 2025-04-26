@@ -28,8 +28,8 @@ import {
 	Pencil,
 	Sparkles,
 	Type,
-	Wand2,
 	Volume2,
+	Wand2,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 

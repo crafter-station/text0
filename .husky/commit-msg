@@ -1,0 +1,18 @@
+commit_msg_file=$1
+commit_msg=$(cat $commit_msg_file)
+
+# Regex pattern for conventional commits
+# format: type(scope): description
+conventional_commit_regex="^(feat|fix|docs|style|refactor|perf|test|chore|revert)(\([a-z0-9-]+\))?: .+"
+merge_commit_regex="^Merge "
+
+if ! echo "$commit_msg" | grep -qE "$conventional_commit_regex|$merge_commit_regex"; then
+    echo "❌ Invalid commit message format."
+    echo "Must match format: type(scope): description"
+    echo "Valid types: feat, fix, docs, style, refactor, perf, test, chore, revert"
+    echo "Example: feat(auth): add login functionality"
+    echo "Note: Merge commits are also allowed"
+    exit 1
+fi
+
+echo "✅ Commit message format is valid"

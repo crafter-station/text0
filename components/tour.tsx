@@ -341,9 +341,9 @@ export function TourProvider({
 									steps[currentStep]?.position,
 								).width,
 							}}
-							className="bg-background relative z-[100] rounded-lg border p-4 shadow-lg"
+							className="relative z-[100] rounded-lg border bg-background p-4 shadow-lg"
 						>
-							<div className="text-muted-foreground absolute right-4 top-4 text-xs">
+							<div className="absolute top-4 right-4 text-muted-foreground text-xs">
 								{currentStep + 1} / {steps.length}
 							</div>
 							<AnimatePresence mode="wait">
@@ -369,7 +369,7 @@ export function TourProvider({
 												type="button"
 												onClick={previousStep}
 												disabled={currentStep === 0}
-												className="text-sm text-muted-foreground hover:text-foreground"
+												className="text-muted-foreground text-sm hover:text-foreground"
 											>
 												Previous
 											</button>
@@ -377,7 +377,7 @@ export function TourProvider({
 										<button
 											type="button"
 											onClick={nextStep}
-											className="ml-auto text-sm font-medium text-primary hover:text-primary/90"
+											className="ml-auto font-medium text-primary text-sm hover:text-primary/90"
 										>
 											{currentStep === steps.length - 1 ? "Finish" : "Next"}
 										</button>
@@ -455,10 +455,10 @@ export function TourAlertDialog({
 							<InvertedT0Logo className="size-16 stroke-1 text-primary" />
 						</motion.div>
 					</div>
-					<AlertDialogTitle className="text-center text-xl font-medium">
+					<AlertDialogTitle className="text-center font-medium text-xl">
 						{title}
 					</AlertDialogTitle>
-					<AlertDialogDescription className="text-muted-foreground mt-2 text-center text-sm">
+					<AlertDialogDescription className="mt-2 text-center text-muted-foreground text-sm">
 						{description}
 					</AlertDialogDescription>
 				</AlertDialogHeader>

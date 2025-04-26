@@ -1,5 +1,5 @@
 import { getSecureSession } from "@/lib/auth/server";
-import { DOCUMENT_KEY, redis, type Document } from "@/lib/redis";
+import { DOCUMENT_KEY, type Document, redis } from "@/lib/redis";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 import { z } from "zod";

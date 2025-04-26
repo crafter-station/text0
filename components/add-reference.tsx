@@ -28,7 +28,7 @@ import { useActionState } from "react";
 import { toast } from "sonner";
 import { UploadThingError } from "uploadthing/server";
 import { addWebsiteReference } from "../actions/websites";
-import { } from "./ui/tooltip";
+import {} from "./ui/tooltip";
 
 export function AddReference({
 	children,
@@ -39,10 +39,8 @@ export function AddReference({
 	const [files, setFiles] = React.useState<File[]>([]);
 	const [open, setOpen] = React.useState(false);
 	const [url, setUrl] = React.useState("");
-	const [state, formAction, isPendingAddWebsiteReferenceAction] = useActionState(
-		addWebsiteReference,
-		undefined,
-	);
+	const [state, formAction, isPendingAddWebsiteReferenceAction] =
+		useActionState(addWebsiteReference, undefined);
 
 	// Handle server action state changes
 	React.useEffect(() => {
@@ -121,8 +119,9 @@ export function AddReference({
 
 	const onFileReject = React.useCallback((file: File, message: string) => {
 		toast(message, {
-			description: `"${file.name.length > 20 ? `${file.name.slice(0, 20)}...` : file.name
-				}" has been rejected`,
+			description: `"${
+				file.name.length > 20 ? `${file.name.slice(0, 20)}...` : file.name
+			}" has been rejected`,
 		});
 	}, []);
 

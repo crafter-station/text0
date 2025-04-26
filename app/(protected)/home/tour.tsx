@@ -1,10 +1,10 @@
 "use client";
 
 import { TourAlertDialog, useTour } from "@/components/tour";
+import type { TourStep } from "@/components/tour";
 import { TOUR_STEP_IDS } from "@/lib/tour-constants";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import type { TourStep } from "@/components/tour";
 
 const HOME_TOUR_STEPS: TourStep[] = [
 	{
