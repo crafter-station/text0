@@ -1,3 +1,4 @@
+import { AddReference } from "@/components/add-reference";
 import { AppHeader } from "@/components/home/app-header";
 import { QuickActionButton } from "@/components/home/quick-action-button";
 import { RecentFilesCard } from "@/components/home/recent-files-card";
@@ -12,10 +13,9 @@ import {
 	USER_REFERENCES_KEY,
 	redis,
 } from "@/lib/redis";
+import { TOUR_STEP_IDS } from "@/lib/tour-constants";
 import { NewDoc } from "./new-doc";
 import { SearchCommand } from "./search-command";
-import { AddReference } from "@/components/add-reference";
-import { TOUR_STEP_IDS } from "@/lib/tour-constants";
 import { HomeTour } from "./tour";
 
 export default async function HomePage() {

@@ -1,4 +1,5 @@
 "use client";
+import { AddReference } from "@/components/add-reference";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
@@ -14,14 +15,13 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { useModel } from "@/hooks/use-model";
 import { useSelectedReferences } from "@/hooks/use-selected-references";
+import { TOUR_STEP_IDS } from "@/lib/tour-constants";
 import { cn } from "@/lib/utils";
 import { useChat } from "@ai-sdk/react";
 import { Loader2, PanelRight, Send, Upload, X } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useCallback, useEffect, useRef } from "react";
 import { ReferenceSelector } from "./reference-selector";
-import { AddReference } from "@/components/add-reference";
-import { TOUR_STEP_IDS } from "@/lib/tour-constants";
 
 export interface AIChatSidebarProps {
 	content: string;

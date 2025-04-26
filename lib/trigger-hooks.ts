@@ -3,7 +3,7 @@
 // This is a simplified implementation that doesn't require the actual Trigger.dev library
 // In a real implementation, you would import from "@trigger.dev/react-hooks"
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 type Run = {
 	id: string;

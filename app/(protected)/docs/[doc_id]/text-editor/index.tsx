@@ -4,26 +4,26 @@ import { EditableDocumentName } from "@/components/editable-document-name";
 import { InlineDiffView } from "@/components/inline-diff-view";
 import { TextSelectionMenu } from "@/components/text-selection-menu";
 import { Button } from "@/components/ui/button";
+import { Toggle } from "@/components/ui/toggle";
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipTrigger,
+} from "@/components/ui/tooltip";
 import useDebouncedCallback from "@/hooks/use-debounced-callback";
 import { useModel } from "@/hooks/use-model";
 import { useSelectedReferences } from "@/hooks/use-selected-references";
+import { TOUR_STEP_IDS } from "@/lib/tour-constants";
 import { cn } from "@/lib/utils";
 import { useCompletion } from "@ai-sdk/react";
 import { Coffee, Sparkles } from "lucide-react";
-import React, { useState } from "react";
-import { AIChatSidebar } from "./ai-chat-sidebar";
-import {
-	TooltipContent,
-	TooltipTrigger,
-	Tooltip,
-} from "@/components/ui/tooltip";
-import { Toggle } from "@/components/ui/toggle";
-import { ModelSelector } from "./model-selector";
-import { VoiceTranscription } from "./voice-transcription";
-import { TextToSpeech } from "./text-to-speech";
 import Image from "next/image";
-import { TOUR_STEP_IDS } from "@/lib/tour-constants";
+import React, { useState } from "react";
 import { DocTour } from "../tour";
+import { AIChatSidebar } from "./ai-chat-sidebar";
+import { ModelSelector } from "./model-selector";
+import { TextToSpeech } from "./text-to-speech";
+import { VoiceTranscription } from "./voice-transcription";
 
 interface TextEditorProps {
 	initialContent: string;
@@ -148,8 +148,8 @@ export function TextEditor({
 	React.useEffect(() => {
 		const handleFullScreenChange = () => {
 			if (isZenMode && !document.fullscreenElement) setIsZenMode(false);
-		}
-		
+		};
+
 		const handleKeyPress = (e: KeyboardEvent) => {
 			if (e.key === "j" && (e.metaKey || e.ctrlKey)) {
 				e.preventDefault();
@@ -450,7 +450,7 @@ export function TextEditor({
 				alt="Light ray background"
 				width={2048}
 				height={2048}
-				className="pointer-events-none absolute -top-20 left-0 right-0 z-0 mx-auto hidden h-full w-full select-none md:block"
+				className="-top-20 pointer-events-none absolute right-0 left-0 z-0 mx-auto hidden h-full w-full select-none md:block"
 				priority
 			/>
 			<div
@@ -531,7 +531,7 @@ export function TextEditor({
 												? "px-4 leading-relaxed opacity-30"
 												: "w-full px-8 text-base opacity-50",
 											isModifying &&
-											"after:absolute after:inset-0 after:animate-shine after:bg-gradient-to-r after:from-transparent after:via-primary/10 after:to-transparent",
+												"after:absolute after:inset-0 after:animate-shine after:bg-gradient-to-r after:from-transparent after:via-primary/10 after:to-transparent",
 										)}
 									>
 										<span className="whitespace-pre-wrap">
@@ -631,7 +631,7 @@ export function TextEditor({
 											<Toggle
 												id="autocomplete"
 												variant="outline"
-												className="size-8 hover:bg-foreground/10 hover:dark:bg-muted data-[state=on]:hover:bg-foreground/10 data-[state=on]:dark:hover:bg-accent/70"
+												className="size-8 hover:bg-foreground/10 data-[state=on]:hover:bg-foreground/10 hover:dark:bg-muted data-[state=on]:dark:hover:bg-accent/70"
 												key={isAutocompleteEnabled ? "true" : "false"}
 												pressed={isAutocompleteEnabled}
 												onPressedChange={setIsAutocompleteEnabled}

@@ -15,7 +15,7 @@ export default async function LandingPage() {
 				alt="Light ray background"
 				width={2048}
 				height={2048}
-				className="pointer-events-none absolute -top-20 left-0 right-0 z-0 mx-auto hidden h-full w-full select-none md:block"
+				className="-top-20 pointer-events-none absolute right-0 left-0 z-0 mx-auto hidden h-full w-full select-none md:block"
 				priority
 			/>
 

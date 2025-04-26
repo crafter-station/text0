@@ -1,8 +1,8 @@
 "use client";
 import type { Document, Reference } from "@/lib/redis";
 import { BrainIcon, ExternalLink, FileText } from "lucide-react";
-import Link from "next/link";
 import { motion } from "motion/react";
+import Link from "next/link";
 
 type FileItem =
 	| (Document & { type: "document" })
@@ -36,7 +36,7 @@ export function RecentFilesCard({ files }: RecentFilesCardProps) {
 									className="flex items-center justify-center group-hover:animate-[wiggle_0.2s_ease-in-out]"
 									whileHover=""
 								>
-									<FileText className="h-4 w-4 transition-transform duration-200 group-hover:scale-110 group-hover:rotate-3" />
+									<FileText className="h-4 w-4 transition-transform duration-200 group-hover:rotate-3 group-hover:scale-110" />
 								</motion.div>
 							</div>
 							<div className="flex grow justify-between">
@@ -71,7 +71,7 @@ export function RecentFilesCard({ files }: RecentFilesCardProps) {
 									className="flex items-center justify-center group-hover:animate-[wiggle_0.2s_ease-in-out]"
 									whileHover=""
 								>
-									<BrainIcon className="h-4 w-4 transition-transform duration-200 group-hover:scale-110 group-hover:rotate-3" />
+									<BrainIcon className="h-4 w-4 transition-transform duration-200 group-hover:rotate-3 group-hover:scale-110" />
 								</motion.div>
 							</div>
 							<div className="flex grow justify-between">

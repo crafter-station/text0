@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Mic, Square, X } from "lucide-react";
-import { toast } from "sonner";
 import { transcribeAudio } from "@/app/actions/transcribe";
+import { Button } from "@/components/ui/button";
 import { TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { Tooltip } from "@/components/ui/tooltip";
+import { Mic, Square, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { toast } from "sonner";
 
 interface VoiceTranscriptionProps {
 	onTranscriptionComplete: (text: string) => void;
@@ -402,19 +402,19 @@ export function VoiceTranscription({
 			{/* Waveform Display */}
 			{showWaveform && (
 				<div className="relative">
-					<div className="absolute -top-14 left-1/2 -translate-x-1/2 -translate-y-1/2 mb-2 bg-card rounded p-1 w-32 h-16">
+					<div className="-top-14 -translate-x-1/2 -translate-y-1/2 absolute left-1/2 mb-2 h-16 w-32 rounded bg-card p-1">
 						<canvas
 							ref={canvasRef}
 							width={128}
 							height={64}
-							className="relative w-full h-full"
+							className="relative h-full w-full"
 						/>
 					</div>
 					<Button
 						size="icon"
 						variant="outline"
 						onClick={cancelRecording}
-						className="absolute p-0 size-6 rounded-full -top-24 -right-18"
+						className="-top-24 -right-18 absolute size-6 rounded-full p-0"
 					>
 						<X className="h-3 w-3" />
 					</Button>

@@ -1,12 +1,12 @@
 import "./globals.css";
+import { TourProvider } from "@/components/tour";
 import { Toaster } from "@/components/ui/sonner";
+import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { Providers } from "./providers";
-import { TourProvider } from "@/components/tour";
-import { Analytics } from "@vercel/analytics/react";
 import { AnnouncementBar } from "./components/AnnouncementBar";
 import { PleaseStarUsOnGitHub } from "./components/PleaseStarUsOnGitHub";
+import { Providers } from "./providers";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",

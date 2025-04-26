@@ -17,5 +17,5 @@ export default function Page() {
 			{/* Right side - Gradient */}
 			<div className="w-full bg-gradient-to-br from-primary/20 via-primary/10 to-background md:w-1/2" />
 		</div>
-	)
+	);
 }

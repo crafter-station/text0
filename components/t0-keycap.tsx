@@ -2,11 +2,11 @@
 
 import { SpinnerIcon } from "@/components/ui/icons/spinner";
 import { T0Logo } from "@/components/ui/icons/t0-logo";
-import { useRouter } from "next/navigation";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { cn } from "@/lib/utils";
 interface KeyProps {
 	char: string;
 	span?: boolean;

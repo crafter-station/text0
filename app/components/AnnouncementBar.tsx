@@ -10,8 +10,8 @@ export function AnnouncementBar() {
 	if (!showAnnouncement) return null;
 
 	return (
-		<div className="absolute top-0 z-50 w-full bg-muted text-foreground px-4 py-2 flex items-center justify-center">
-			<div className="flex text-center items-center gap-2 text-sm">
+		<div className="absolute top-0 z-50 flex w-full items-center justify-center bg-muted px-4 py-2 text-foreground">
+			<div className="flex items-center gap-2 text-center text-sm">
 				<a
 					href="https://youtu.be/KDRwgbwq0_c?t=1143"
 					target="_blank"
@@ -32,7 +32,7 @@ export function AnnouncementBar() {
 					variant="ghost"
 					size="icon"
 					onClick={() => setShowAnnouncement(false)}
-					className="size-6 border border-border transition-all rounded-full !p-0 hover:bg-primary/10 text-xs opacity-60 hover:opacity-100"
+					className="!p-0 size-6 rounded-full border border-border text-xs opacity-60 transition-all hover:bg-primary/10 hover:opacity-100"
 				>
 					<XIcon className="size-2" />
 				</Button>
