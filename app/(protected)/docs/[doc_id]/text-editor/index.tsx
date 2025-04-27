@@ -697,16 +697,13 @@ export function TextEditor({
 				)}
 			</div>
 
-			{/* AI Chat Sidebar - Only show when not in Zen mode */}
-			{!isZenMode && (
-				<div className="group/sidebar-wrapper has-[data-side=right]:ml-0">
-					<AIChatSidebar
-						content={input}
-						isEnabled={isAutocompleteEnabled}
-						onPendingUpdate={setPendingUpdate}
-					/>
-				</div>
-			)}
+			<div className="group/sidebar-wrapper has-[data-side=right]:ml-0">
+				<AIChatSidebar
+					content={input}
+					isEnabled={isAutocompleteEnabled}
+					onPendingUpdate={setPendingUpdate}
+				/>
+			</div>
 
 			{/* Text Selection Menu */}
 			{selectedText && selectionPosition && !isZenMode && (
