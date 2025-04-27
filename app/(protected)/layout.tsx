@@ -8,6 +8,8 @@ import {
 	redis,
 } from "@/lib/redis";
 import { redirect } from "next/navigation";
+import { AnnouncementBar, PersistenceController } from "../components/announcement-bar";
+
 export default async function ProtectedLayout({
 	children,
 }: Readonly<{
@@ -37,10 +39,14 @@ export default async function ProtectedLayout({
 		);
 
 	return (
-		<SidebarProvider defaultOpen={true}>
-			<div className="flex h-screen w-full">
+		<SidebarProvider defaultOpen={true} className="grid grid-rows-[auto_1fr] h-dvh">
+			<PersistenceController >
+				<AnnouncementBar />
+			</PersistenceController>
+			<div className="row-span-2 flex">
 				<MinimalIntegrationSidebar documents={documents} />
-				<main className="w-full flex-1 overflow-auto">{children}</main>
+				<main className="flex overflow-auto flex-1">
+					<div className="grid flex-1">{children}</div></main>
 			</div>
 		</SidebarProvider>
 	);

@@ -128,7 +128,7 @@ export function MinimalIntegrationSidebar({ documents = [] as Document[] }) {
 		<TooltipProvider delayDuration={0}>
 			<Sidebar
 				collapsible="icon"
-				className="relative flex flex-col border-border border-r bg-background text-foreground transition-all duration-300 ease-in-out"
+				className="relative flex flex-col border-border border-r bg-background text-foreground transition-all duration-300 ease-in-out h-full"
 			>
 				{/* Header with Text0 Logo */}
 				<SidebarHeader className="flex w-full flex-row justify-between group-data-[collapsible=icon]:flex-col">

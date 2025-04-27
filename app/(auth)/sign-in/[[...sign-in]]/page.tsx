@@ -1,9 +1,15 @@
+import { PersistenceController, AnnouncementBar } from "@/app/components/announcement-bar";
 import { InvertedT0Logo } from "@/components/ui/icons/t0-logo";
 import { SignIn } from "@clerk/nextjs";
 
 export default function Page() {
 	return (
-		<div className="flex min-h-screen flex-col-reverse md:flex-row">
+		<div className="relative flex min-h-screen flex-col-reverse md:flex-row">
+			<div className="absolute top-0 right-0 left-0 z-50">
+				<PersistenceController>
+					<AnnouncementBar/>
+				</PersistenceController>
+			</div>
 			{/* Left side - Sign In */}
 			<div className="flex min-h-screen w-full flex-col items-center justify-center bg-background p-4 md:w-1/2 md:p-8">
 				<div className="flex flex-col items-center space-y-4 text-center">
