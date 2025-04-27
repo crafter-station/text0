@@ -111,7 +111,7 @@ export function AIChatSidebar({
 			<Sidebar
 				collapsible="icon"
 				side="right"
-				className="relative border-border border-l bg-background text-foreground transition-all duration-300 ease-in-out h-full"
+				className="relative h-full border-border border-l bg-background text-foreground transition-all duration-300 ease-in-out"
 				variant="sidebar"
 			>
 				<SidebarHeader className="flex flex-row items-center justify-between border-b bg-background px-4 group-data-[collapsible=icon]:px-2">
