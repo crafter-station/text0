@@ -5,10 +5,18 @@ import { GithubIcon } from "@/components/ui/icons/github";
 import { VercelIcon } from "@/components/ui/icons/vercel";
 import { XIcon } from "@/components/ui/icons/x-icon";
 import Image from "next/image";
-
+import {
+	AnnouncementBar,
+	PersistenceController,
+} from "./components/announcement-bar";
 export default async function LandingPage() {
 	return (
 		<div className="relative flex h-screen flex-col overflow-hidden bg-background text-foreground">
+			<div className="absolute top-0 right-0 left-0 z-50">
+				<PersistenceController>
+					<AnnouncementBar />
+				</PersistenceController>
+			</div>
 			{/* Background Image */}
 			<Image
 				src="/bghero.webp"

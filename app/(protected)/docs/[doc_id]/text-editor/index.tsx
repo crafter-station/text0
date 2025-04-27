@@ -486,7 +486,7 @@ export function TextEditor({
 				)}
 
 				<div className="flex h-full justify-center py-8">
-					<div className={cn("h-full w-full max-w-4xl")}>
+					<div className={cn("flex h-full w-full max-w-4xl flex-col")}>
 						{/* Add EditableDocumentName component */}
 						<EditableDocumentName
 							documentId={documentId}
