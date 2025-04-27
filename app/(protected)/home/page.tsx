@@ -64,7 +64,7 @@ export default async function HomePage() {
 		.slice(0, 5); // Limit to 5 most recent items
 
 	return (
-		<div className="flex h-screen flex-col bg-background text-foreground">
+		<div className="flex h-full flex-col bg-background text-foreground">
 			<HomeTour />
 			{/* Main Content */}
 			<main className="flex flex-1 items-center justify-center overflow-auto">

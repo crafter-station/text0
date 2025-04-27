@@ -42,7 +42,6 @@ export function TextEditor({
 	const [cursorPosition, setCursorPosition] = React.useState(0);
 	const [isAutocompleteEnabled, setIsAutocompleteEnabled] =
 		React.useState(true);
-	const [isAIChatOpen, setIsAIChatOpen] = React.useState(true);
 	const [isZenMode, setIsZenMode] = React.useState(false);
 
 	const [updatedAt, setUpdatedAt] = React.useState(initialUpdatedAt);
@@ -155,7 +154,6 @@ export function TextEditor({
 				e.preventDefault();
 				setIsZenMode((prev) => !prev);
 				if (!isZenMode) {
-					setIsAIChatOpen(false);
 					// Request full screen when entering zen mode
 					document.documentElement.requestFullscreen().catch((err) => {
 						console.log("Error attempting to enable full-screen mode:", err);
@@ -457,8 +455,7 @@ export function TextEditor({
 				id={TOUR_STEP_IDS.TEXT_EDITOR}
 				className={cn(
 					"relative flex flex-1 flex-col",
-					!isAIChatOpen && "pr-0",
-					isZenMode && "fixed inset-0 z-50 bg-background/95",
+					isZenMode ? "fixed inset-0 z-50 bg-background/95" : "pr-0",
 				)}
 			>
 				{/* Decorative gradients - only show when modifying */}
@@ -660,7 +657,6 @@ export function TextEditor({
 											onClick={() => {
 												setIsZenMode((prev) => !prev);
 												if (!isZenMode) {
-													setIsAIChatOpen(false);
 													// Request full screen when clicking the button
 													document.documentElement
 														.requestFullscreen()
@@ -701,16 +697,13 @@ export function TextEditor({
 				)}
 			</div>
 
-			{/* AI Chat Sidebar - Only show when not in Zen mode */}
-			{isAIChatOpen && !isZenMode && (
-				<div className="group/sidebar-wrapper has-[data-side=right]:ml-0">
-					<AIChatSidebar
-						content={input}
-						isEnabled={isAutocompleteEnabled}
-						onPendingUpdate={setPendingUpdate}
-					/>
-				</div>
-			)}
+			<div className="group/sidebar-wrapper has-[data-side=right]:ml-0">
+				<AIChatSidebar
+					content={input}
+					isEnabled={isAutocompleteEnabled}
+					onPendingUpdate={setPendingUpdate}
+				/>
+			</div>
 
 			{/* Text Selection Menu */}
 			{selectedText && selectionPosition && !isZenMode && (
