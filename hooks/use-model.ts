@@ -1,19 +1,11 @@
+import { models } from "@/lib/models";
 import { useQueryState } from "nuqs";
 import { useEffect } from "react";
 
 const STORAGE_KEY = "selected-model";
 const DEFAULT_MODEL = "gpt-4o-mini";
 
-const VALID_MODELS = [
-	"gpt-4o-mini",
-	"grok-3-fast-beta",
-	"claude-3-5-sonnet-latest",
-	"claude-3-5-haiku-latest",
-	"llama-3.1-8b-instant",
-	"llama-3.3-70b-versatile",
-	"gemini-2.0-flash-001",
-	"gemini-2.0-flash-lite-preview-02-05",
-];
+const VALID_MODELS = models.map((model) => model.id);
 
 function safeGetItem(key: string): string | null {
 	try {
