@@ -44,6 +44,7 @@ A text editor with absurdly smart autocomplete. Text0 serves as a copilot for wr
 - UploadThing
 - Cursor
 - Vercel
+- Trigger.dev
 - Clerk (Authentication)
 
 ## Getting Started
