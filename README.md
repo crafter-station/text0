@@ -1,5 +1,7 @@
 <h3 align="center">
-  <img src="public/t0-logo.svg" width="50" alt="Text0 Logo"/><br/>
+  <span style="display:inline-block; background:#141413; border-radius:8px; padding:8px; padding-top:10px;">
+    <img src="public/t0-logo.svg" width="50" alt="Text0 Logo"/>
+  </span><br/>
   <img src="https://raw.githubusercontent.com/crafter-station/website/main/public/transparent.png" height="30" width="0px"/>
   <br/>
   Text0
@@ -10,7 +12,7 @@
   </a>
   <br/>
   <small>
-    <a href="https://crafter-station.com" target="_blank" style="color: #888; text-decoration: none;">
+    <a href="https://crafter-station.com" target="_blank" style="color: #888; text-decoration: none; font-size: 12px;">
       by Crafter Station
     </a>
   </small>
