@@ -1,6 +1,5 @@
 <h3 align="center">
   <img src="public/t0-logo-bg.svg" width="80" alt="Text0 Logo"/>
-  <br/>
   <img src="https://raw.githubusercontent.com/crafter-station/website/main/public/transparent.png" height="30" width="0px"/>
   <br/>
   Text0
@@ -10,11 +9,11 @@
     <img src="https://img.shields.io/badge/Join%20Our%20Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Join Discord"/>
   </a>
   <br/>
-  <small>
-    <a href="https://crafter-station.com" target="_blank" style="color: #888; text-decoration: none; font-size: 12px;">
+    <a href="https://crafter-station.com" target="_blank" >
+    <span style="color: #888; text-decoration: none; font-size: 12px;">
       by Crafter Station
+    </span>
     </a>
-  </small>
 </h3>
 
 # Text0
