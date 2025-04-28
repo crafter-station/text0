@@ -1,7 +1,6 @@
 <h3 align="center">
-  <span style="display:inline-block; background:#141413; border-radius:8px; padding:8px; padding-top:10px;">
-    <img src="public/t0-logo.svg" width="50" alt="Text0 Logo"/>
-  </span><br/>
+  <img src="public/t0-logo-bg.svg" width="80" alt="Text0 Logo"/>
+  <br/>
   <img src="https://raw.githubusercontent.com/crafter-station/website/main/public/transparent.png" height="30" width="0px"/>
   <br/>
   Text0
