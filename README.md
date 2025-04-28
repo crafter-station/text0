@@ -1,3 +1,21 @@
+<h3 align="center">
+  <img src="public/t0-logo.svg" width="50" alt="Text0 Logo"/><br/>
+  <img src="https://raw.githubusercontent.com/crafter-station/website/main/public/transparent.png" height="30" width="0px"/>
+  <br/>
+  Text0
+  <br/>
+  <br/>
+  <a href="https://discord.gg/7MfrzBAX" target="_blank">
+    <img src="https://img.shields.io/badge/Join%20Our%20Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Join Discord"/>
+  </a>
+  <br/>
+  <small>
+    <a href="https://crafter-station.com" target="_blank" style="color: #888; text-decoration: none;">
+      by Crafter Station
+    </a>
+  </small>
+</h3>
+
 # Text0
 
 A text editor with absurdly smart autocomplete. Text0 serves as a copilot for writing, accessing user-provided references to offer context and help users write faster.
