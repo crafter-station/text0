@@ -26,7 +26,7 @@ export function AnnouncementBar() {
 					transition={{ type: "easeOut", duration: 0.25 }}
 					className="flex h-10 items-center justify-center bg-muted px-4 text-foreground"
 				>
-					<div className="flex items-center gap-2 text-center text-sm">
+					<div className="flex items-center gap-2 text-center text-xs sm:text-sm">
 						<a
 							href="https://youtu.be/KDRwgbwq0_c?t=1143"
 							target="_blank"

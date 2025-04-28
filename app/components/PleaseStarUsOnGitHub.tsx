@@ -8,6 +8,7 @@ import {
 	DrawerTitle,
 	DrawerTrigger,
 } from "@/components/ui/drawer";
+import { DiscordIcon } from "@/components/ui/icons/discord";
 import { GithubIcon } from "@/components/ui/icons/github";
 import { T0Logo } from "@/components/ui/icons/t0-logo";
 import { XIcon } from "@/components/ui/icons/x-icon";
@@ -250,6 +251,16 @@ export function PleaseStarUsOnGitHub() {
 						>
 							<XIcon className="size-3" />
 						</a>
+						<div className="animate-pulse rounded-full bg-[#5865F2] p-1">
+							<a
+								href="https://discord.gg/7MfrzBAX"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="hover:text-foreground"
+							>
+								<DiscordIcon fill="var(--muted)" className="h-3.5 w-3.5" />
+							</a>
+						</div>
 					</div>
 				</div>
 			</div>

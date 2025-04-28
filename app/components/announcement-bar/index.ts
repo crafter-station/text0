@@ -1,2 +1,2 @@
 export * from "./AnnouncementBar";
-export * from "./PersistenceController";
+export * from "./AnnouncementBarWrapper";

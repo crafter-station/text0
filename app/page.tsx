@@ -1,21 +1,18 @@
+import { AnimatedBadge } from "@/components/animated-badge";
 import { AnimatedPrompt } from "@/components/animated-prompt";
 import { T0Keycap } from "@/components/t0-keycap";
 import { TextScramble } from "@/components/text-scramble";
+import { DiscordIcon } from "@/components/ui/icons/discord";
 import { GithubIcon } from "@/components/ui/icons/github";
-import { VercelIcon } from "@/components/ui/icons/vercel";
 import { XIcon } from "@/components/ui/icons/x-icon";
 import Image from "next/image";
-import {
-	AnnouncementBar,
-	PersistenceController,
-} from "./components/announcement-bar";
+import { AnnouncementBarWrapper } from "./components/announcement-bar/AnnouncementBarWrapper";
+
 export default async function LandingPage() {
 	return (
 		<div className="relative flex h-screen flex-col overflow-hidden bg-background text-foreground">
 			<div className="absolute top-0 right-0 left-0 z-50">
-				<PersistenceController>
-					<AnnouncementBar />
-				</PersistenceController>
+				<AnnouncementBarWrapper />
 			</div>
 			{/* Background Image */}
 			<Image
@@ -31,12 +28,7 @@ export default async function LandingPage() {
 			<main className="relative z-10 flex h-full flex-1 items-center justify-center overflow-auto">
 				<div className="container mx-auto my-auto flex h-full max-w-2xl flex-col items-center justify-center">
 					{/* Hackathon Badge */}
-					<div className="mb-8 flex items-center gap-2 rounded-full border border-border/50 bg-background/50 px-3 py-1.5 backdrop-blur-sm">
-						<VercelIcon size={16} className="text-foreground" />
-						<span className="text-muted-foreground text-sm">
-							Built for Vercel Hackathon
-						</span>
-					</div>
+					<AnimatedBadge />
 
 					{/* App Title */}
 					<div className="mb-8 flex items-center justify-center gap-4 px-4 text-center">
@@ -96,6 +88,16 @@ export default async function LandingPage() {
 						>
 							<XIcon className="h-3.5 w-3.5" />
 						</a>
+						<div className="animate-pulse rounded-full bg-[#5865F2] p-1">
+							<a
+								href="https://discord.gg/7MfrzBAX"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="hover:text-foreground"
+							>
+								<DiscordIcon fill="var(--muted)" className="h-3.5 w-3.5" />
+							</a>
+						</div>
 					</div>
 					<div className="text-muted-foreground text-xs">
 						Built by{" "}

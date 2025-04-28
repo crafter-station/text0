@@ -61,6 +61,8 @@
 	--shadow-lg: var(--shadow-lg);
 	--shadow-xl: var(--shadow-xl);
 	--shadow-2xl: var(--shadow-2xl);
+
+	--crafter-primary: var(--crafter-primary);
 }
 
 :root {
@@ -128,6 +130,9 @@
 	--keyboard-key-shadow: oklch(0.1 0 0);
 	--keyboard-inset-highlight: oklch(0.3 0 0);
 	--keyboard-inset-shadow: oklch(0.05 0 0);
+
+	/* crafter-primary */
+	--crafter-primary: oklch(0.83 0.1576 83.08);
 }
 
 .dark {
@@ -195,6 +200,9 @@
 	--keyboard-key-shadow: oklch(0.78 0.02 260); /* More pronounced gray-blue for key shadows */
 	--keyboard-inset-highlight: oklch(0.88 0.005 270); /* Subtle purple-tinted inset highlight */
 	--keyboard-inset-shadow: oklch(0.8 0.02 260); /* Bolder gray-blue for inset shadows */
+
+	/* crafter-primary */
+	--crafter-primary: oklch(0.88 0.1811 94.46);
 }
 
 @layer base {
