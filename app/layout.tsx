@@ -77,7 +77,7 @@ export const metadata: Metadata = {
 	},
 	themeColor: "#000000",
 	icons: {
-		icon: "/favicon.ico",
+		icon: "/icon.svg",
 		apple: "/apple-touch-icon.png",
 	},
 	category: "technology",
