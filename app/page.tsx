@@ -28,10 +28,10 @@ export default async function LandingPage() {
 			<main className="relative z-10 flex h-full flex-1 items-center justify-center overflow-auto">
 				<div className="container mx-auto my-auto flex h-full max-w-2xl flex-col items-center justify-center">
 					{/* YouTube Video Link */}
-					<div className="mb-6 relative">
+					<div className="relative mb-6">
 						<div
-							className="absolute inset-[-8px] rounded-full bg-red-500/30 blur-lg animate-[pulse_3s_ease-in-out_infinite]"
-							style={{ transform: 'scale(1.2)' }}
+							className="absolute inset-[-8px] animate-[pulse_3s_ease-in-out_infinite] rounded-full bg-red-500/30 blur-lg"
+							style={{ transform: "scale(1.2)" }}
 						/>
 						<a
 							href="https://www.youtube.com/live/KDRwgbwq0_c?si=mta-laiUpDWDF188&t=1142"
