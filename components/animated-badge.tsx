@@ -17,7 +17,7 @@ export function AnimatedBadge() {
 	}, []);
 
 	return (
-		<div className="mb-8 flex items-center gap-2 rounded-full border border-border/50 bg-background/50 px-3 py-1.5 backdrop-blur-sm">
+		<div className="mb-8 flex justify-center items-center gap-2 rounded-full border border-border/50 bg-background/50 px-3 py-1.5 backdrop-blur-sm w-[24ch]">
 			<AnimatePresence mode="wait">
 				<motion.div
 					key={isVercel ? "vercel" : "crafter"}
@@ -25,14 +25,14 @@ export function AnimatedBadge() {
 					animate={{ opacity: 1, y: 0 }}
 					exit={{ opacity: 0, y: -10 }}
 					transition={{ duration: 0.3 }}
-					className="flex items-center gap-2"
+					className="flex justify-center items-center gap-2"
 				>
 					{isVercel ? (
 						<VercelIcon size={16} className="text-foreground" />
 					) : (
 						<CrafterIcon size={16} className="text-foreground" />
 					)}
-					<span className="text-muted-foreground text-sm">
+					<span className="text-muted-foreground text-sm text-center">
 						{isVercel
 							? "Built for Vercel Hackathon"
 							: "Built by Crafter Station"}
