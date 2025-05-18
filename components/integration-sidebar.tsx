@@ -371,6 +371,7 @@ export function MinimalIntegrationSidebar({ documents = [] as Document[] }) {
 														</SidebarMenuButton>
 													)}
 												</div>
+												<ul>
 												{documents.map((doc) => {
 													const isDocPending = pendingDocId === doc.id;
 													const isDocBeingDeleted = isDocPending && isDeleting;
@@ -450,8 +451,10 @@ export function MinimalIntegrationSidebar({ documents = [] as Document[] }) {
 																</DropdownMenu>
 															</SidebarMenuItem>
 														</div>
+												
 													);
 												})}
+												</ul>
 											</div>
 										</ScrollArea>
 									</CollapsibleContent>
