@@ -372,88 +372,88 @@ export function MinimalIntegrationSidebar({ documents = [] as Document[] }) {
 													)}
 												</div>
 												<ul>
-												{documents.map((doc) => {
-													const isDocPending = pendingDocId === doc.id;
-													const isDocBeingDeleted = isDocPending && isDeleting;
-													const isDocBeingExported =
-														isDocPending && isExporting;
-													return (
-														<div
-															key={doc.id}
-															className="ml-4 border-border border-l border-dashed px-2 group-data-[collapsible=icon]:ml-0 group-data-[collapsible=icon]:px-0"
-														>
-															<SidebarMenuItem>
-																<SidebarMenuButton
-																	asChild
-																	tooltip={doc.name}
-																	data-active={
-																		pathname.split("/").at(-1) === doc.id
-																	}
-																	className="flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-muted-foreground text-sm hover:bg-accent hover:text-accent-foreground group-data-[collapsible=icon]:justify-center"
-																	style={{ opacity: isDocPending ? 0.7 : 1 }}
-																>
-																	<Link
-																		href={`/docs/${doc.id}`}
-																		className="flex w-full items-center gap-2"
+													{documents.map((doc) => {
+														const isDocPending = pendingDocId === doc.id;
+														const isDocBeingDeleted =
+															isDocPending && isDeleting;
+														const isDocBeingExported =
+															isDocPending && isExporting;
+														return (
+															<div
+																key={doc.id}
+																className="ml-4 border-border border-l border-dashed px-2 group-data-[collapsible=icon]:ml-0 group-data-[collapsible=icon]:px-0"
+															>
+																<SidebarMenuItem>
+																	<SidebarMenuButton
+																		asChild
+																		tooltip={doc.name}
+																		data-active={
+																			pathname.split("/").at(-1) === doc.id
+																		}
+																		className="flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-muted-foreground text-sm hover:bg-accent hover:text-accent-foreground group-data-[collapsible=icon]:justify-center"
+																		style={{ opacity: isDocPending ? 0.7 : 1 }}
 																	>
-																		<FileText className="h-4 w-4 shrink-0" />
-																		<span className="truncate group-data-[collapsible=icon]:hidden">
-																			{doc.name}
-																		</span>
-																	</Link>
-																</SidebarMenuButton>
-																<DropdownMenu>
-																	<DropdownMenuTrigger asChild>
-																		<SidebarMenuAction
-																			disabled={isDocPending} // Disable trigger if pending
+																		<Link
+																			href={`/docs/${doc.id}`}
+																			className="flex w-full items-center gap-2"
 																		>
-																			{isDocPending ? (
-																				<Loader2 className="h-4 w-4 animate-spin" />
-																			) : (
-																				<MoreHorizontal className="h-4 w-4" />
-																			)}
-																		</SidebarMenuAction>
-																	</DropdownMenuTrigger>
-																	<DropdownMenuContent
-																		side="right"
-																		align="start"
-																	>
-																		<DropdownMenuItem
-																			onClick={() =>
-																				handleExport(doc.id, doc.name)
-																			}
-																			disabled={isExporting}
-																			className="flex cursor-pointer items-center gap-2"
+																			<FileText className="h-4 w-4 shrink-0" />
+																			<span className="max-w-40 truncate group-data-[collapsible=icon]:hidden">
+																				{doc.name}
+																			</span>
+																		</Link>
+																	</SidebarMenuButton>
+																	<DropdownMenu>
+																		<DropdownMenuTrigger asChild>
+																			<SidebarMenuAction
+																				disabled={isDocPending} // Disable trigger if pending
+																			>
+																				{isDocPending ? (
+																					<Loader2 className="h-4 w-4 animate-spin" />
+																				) : (
+																					<MoreHorizontal className="h-4 w-4" />
+																				)}
+																			</SidebarMenuAction>
+																		</DropdownMenuTrigger>
+																		<DropdownMenuContent
+																			side="right"
+																			align="start"
 																		>
-																			{isDocBeingExported ? (
-																				<Loader2 className="h-4 w-4 animate-spin" />
-																			) : (
-																				<Download className="h-4 w-4" />
-																			)}
-																			<span>Export Markdown</span>
-																		</DropdownMenuItem>
-																		<DropdownMenuSeparator />
-																		<DropdownMenuItem
-																			onClick={() =>
-																				handleDelete(doc.id, doc.name)
-																			}
-																			disabled={isDeleting}
-																			className="flex cursor-pointer items-center gap-2"
-																		>
-																			{isDocBeingDeleted ? (
-																				<Loader2 className="h-4 w-4 animate-spin" />
-																			) : (
-																				<Trash2 className="h-4 w-4" />
-																			)}
-																			<span>Delete Document</span>
-																		</DropdownMenuItem>
-																	</DropdownMenuContent>
-																</DropdownMenu>
-															</SidebarMenuItem>
-														</div>
-												
-													);
-												})}
+																			<DropdownMenuItem
+																				onClick={() =>
+																					handleExport(doc.id, doc.name)
+																				}
+																				disabled={isExporting}
+																				className="flex cursor-pointer items-center gap-2"
+																			>
+																				{isDocBeingExported ? (
+																					<Loader2 className="h-4 w-4 animate-spin" />
+																				) : (
+																					<Download className="h-4 w-4" />
+																				)}
+																				<span>Export Markdown</span>
+																			</DropdownMenuItem>
+																			<DropdownMenuSeparator />
+																			<DropdownMenuItem
+																				onClick={() =>
+																					handleDelete(doc.id, doc.name)
+																				}
+																				disabled={isDeleting}
+																				className="flex cursor-pointer items-center gap-2"
+																			>
+																				{isDocBeingDeleted ? (
+																					<Loader2 className="h-4 w-4 animate-spin" />
+																				) : (
+																					<Trash2 className="h-4 w-4" />
+																				)}
+																				<span>Delete Document</span>
+																			</DropdownMenuItem>
+																		</DropdownMenuContent>
+																	</DropdownMenu>
+																</SidebarMenuItem>
+															</div>
+														);
+													})}
 												</ul>
 											</div>
 										</ScrollArea>
