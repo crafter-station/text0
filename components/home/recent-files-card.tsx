@@ -49,8 +49,8 @@ export function RecentFilesCard({ files }: RecentFilesCardProps) {
 									</p>
 								</div>
 								<div className="absolute right-4 bottom-4">
-									<p className="text-muted-foreground text-xs font-light">
-										{new Date(file.createdAt).toDateString().slice(3,15)}
+									<p className="font-light text-muted-foreground text-xs ">
+										{new Date(file.createdAt).toDateString().slice(3, 15)}
 									</p>
 								</div>
 							</div>
@@ -82,8 +82,8 @@ export function RecentFilesCard({ files }: RecentFilesCardProps) {
 									</h3>
 								</div>
 								<div className="absolute right-4 bottom-4">
-									<p className="text-muted-foreground text-xs">
-										{new Date(file.uploadedAt).toDateString().slice(3,15)}
+									<p className="font-light text-muted-foreground text-xs">
+										{new Date(file.uploadedAt).toDateString().slice(3, 15)}
 									</p>
 								</div>
 							</div>
