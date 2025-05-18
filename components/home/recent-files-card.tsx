@@ -20,7 +20,7 @@ export function RecentFilesCard({ files }: RecentFilesCardProps) {
 
 	return (
 		<div className="overflow-hidden rounded-lg border border-border">
-			<div className="grid divide-y divide-border">
+			<ul className="grid divide-y divide-border">
 				{files.map((file) =>
 					file.type === "document" ? (
 						<Link
@@ -49,8 +49,8 @@ export function RecentFilesCard({ files }: RecentFilesCardProps) {
 									</p>
 								</div>
 								<div className="absolute right-4 bottom-4">
-									<p className="text-muted-foreground text-xs">
-										{new Date(file.createdAt).toLocaleDateString()}
+									<p className="text-muted-foreground text-xs font-light">
+										{new Date(file.createdAt).toDateString().slice(3,15)}
 									</p>
 								</div>
 							</div>
@@ -83,14 +83,14 @@ export function RecentFilesCard({ files }: RecentFilesCardProps) {
 								</div>
 								<div className="absolute right-4 bottom-4">
 									<p className="text-muted-foreground text-xs">
-										{new Date(file.uploadedAt).toLocaleDateString()}
+										{new Date(file.uploadedAt).toDateString().slice(3,15)}
 									</p>
 								</div>
 							</div>
 						</a>
 					),
 				)}
-			</div>
+			</ul>
 		</div>
 	);
 }
