@@ -41,7 +41,7 @@ export function RecentFilesCard({ files }: RecentFilesCardProps) {
 							</div>
 							<div className="flex grow justify-between">
 								<div className="grow pr-16">
-									<h3 className="truncate font-medium text-[15px]">
+									<h3 className="max-w-60 truncate font-medium text-[15px]">
 										{file.name}
 									</h3>
 									<p className="text-muted-foreground text-xs ">
