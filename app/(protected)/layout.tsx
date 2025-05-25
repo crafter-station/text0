@@ -1,6 +1,7 @@
 import { MinimalIntegrationSidebar } from "@/components/integration-sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { getSecureUser } from "@/lib/auth/server";
+import { DocumentContextProvider } from "../context/documentContext";
 import {
 	DOCUMENT_KEY,
 	type Document,
@@ -45,10 +46,12 @@ export default async function ProtectedLayout({
 		>
 			<AnnouncementBarWrapper />
 			<div className="row-span-2 flex">
-				<MinimalIntegrationSidebar documents={documents} />
-				<main className="flex flex-1 overflow-auto">
-					<div className="grid flex-1">{children}</div>
-				</main>
+				<DocumentContextProvider>
+					<MinimalIntegrationSidebar documents={documents} />
+					<main className="flex flex-1 overflow-auto">
+						<div className="grid flex-1">{children}</div>
+					</main>
+				</DocumentContextProvider>
 			</div>
 		</SidebarProvider>
 	);
