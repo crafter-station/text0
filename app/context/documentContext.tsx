@@ -16,8 +16,9 @@ interface DocumentContextType {
 	isExporting: boolean;
 	pendingDocId: string | null;
 	handleExport: (docId: string, docName: string) => Promise<void>;
+	handleDelete: () => Promise<void>;
 	documentName: string | null;
-	openDeleteDialog: (docName: string) => void;
+	openDeleteDialog: (docId:string, docName:string) => void;
 	closeDeleteDialog: () => void;
 	showDeleteDialog: boolean;
 }
@@ -35,15 +36,16 @@ export function DocumentContextProvider({ children }: { children: ReactNode }) {
 	const pathname = usePathname();
 	const router = useRouter();
 
-	const handleDelete = async (docId: string, docName: string) => {
-		closeDeleteDialog();
-		setPendingDocId(docId);
+	const handleDelete = async () => {
+		setShowDeleteDialog(false);	
 		startDeleteTransition(async () => {
 			try {
-				const result = await deleteDocument(docId);
+				
+				if(!pendingDocId || !documentName) throw TypeError
+				const result = await deleteDocument(pendingDocId);
 				if (result.success) {
-					toast.success(`Document "${docName}" deleted successfully`);
-					if (pathname === `/docs/${docId}`) {
+					toast.success(`Document "${documentName}" deleted successfully`);
+					if (pathname === `/docs/${pendingDocId}`) {
 						console.log("reached");
 						router.push("/home");
 					}
@@ -57,6 +59,7 @@ export function DocumentContextProvider({ children }: { children: ReactNode }) {
 				console.log("reached error");
 			} finally {
 				setPendingDocId(null);
+				setDocumentName(null);
 			}
 		});
 	};
@@ -81,15 +84,17 @@ export function DocumentContextProvider({ children }: { children: ReactNode }) {
 		});
 	};
 
-	function openDeleteDialog(docName: string) {
+	function openDeleteDialog(docId:string, docName:string) {
 		setDocumentName(docName);
+		setPendingDocId(docId);
 		setShowDeleteDialog(true);
-		console.log("Dialog opened.");
 	}
 
 	function closeDeleteDialog() {
 		setDocumentName(null);
+		setPendingDocId(null);
 		setShowDeleteDialog(false);
+		router.refresh();
 	}
 
 	const value = {
@@ -97,6 +102,7 @@ export function DocumentContextProvider({ children }: { children: ReactNode }) {
 		isExporting,
 		pendingDocId,
 		handleExport,
+		handleDelete,
 		documentName,
 		openDeleteDialog,
 		closeDeleteDialog,

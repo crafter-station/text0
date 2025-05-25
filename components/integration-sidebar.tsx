@@ -69,6 +69,7 @@ import { toast } from "sonner";
 import { CommandMenu } from "./command-menu";
 import { Input } from "./ui/input";
 import { ScrollArea } from "./ui/scroll-area";
+import useDocumentContext from "@/app/context/documentContext";
 
 interface Document {
 	id: string;
@@ -88,9 +89,12 @@ export function MinimalIntegrationSidebar({ documents = [] as Document[] }) {
 	);
 	const pathname = usePathname();
 
-	const [isDeleting, startDeleteTransition] = useTransition();
-	const [isExporting, startExportTransition] = useTransition();
-	const [pendingDocId, setPendingDocId] = useState<string | null>(null);
+	const {openDeleteDialog,
+		   pendingDocId,
+		   isDeleting,
+		   isExporting,
+		   handleExport,	
+		} = useDocumentContext()
 
 	useEffect(() => {
 		if (state?.success && state.data?.documentId) {
@@ -103,56 +107,9 @@ export function MinimalIntegrationSidebar({ documents = [] as Document[] }) {
 		}
 	}, [state, router]);
 
-	const handleExport = async (docId: string, docName: string) => {
-		setPendingDocId(docId);
-		startExportTransition(async () => {
-			try {
-				const result = await getDocumentContentForExport(docId);
-				if (result.success && result.data) {
-					downloadFile(`${docName}.md`, result.data.content, "text/markdown");
-					toast.success(`Exported "${docName}.md"`);
-				} else {
-					toast.error(result.error || "Failed to export document content.");
-				}
-			} catch (error) {
-				console.error("Export error:", error);
-				toast.error("An unexpected error occurred during export.");
-			} finally {
-				setPendingDocId(null);
-			}
-		});
-	};
+		
 
-	const handleDelete = async (docId: string, docName: string) => {
-		if (
-			!window.confirm(
-				`Are you sure you want to delete "${docName}"? This action cannot be undone.`,
-			)
-		) {
-			return;
-		}
-
-		setPendingDocId(docId);
-		startDeleteTransition(async () => {
-			try {
-				const result = await deleteDocument(docId);
-				if (result.success) {
-					toast.success(`Document "${docName}" deleted successfully`);
-					if (pathname === `/docs/${docId}`) {
-						router.push("/home");
-					}
-					router.refresh();
-				} else {
-					toast.error(result.error || "Failed to delete document.");
-				}
-			} catch (error) {
-				console.error("Delete error:", error);
-				toast.error("An unexpected error occurred during deletion.");
-			} finally {
-				setPendingDocId(null);
-			}
-		});
-	};
+	
 
 	const integrations = [
 		{ name: "GitHub", icon: GithubIcon, link: "/integrations/github" },
@@ -403,7 +360,7 @@ export function MinimalIntegrationSidebar({ documents = [] as Document[] }) {
 																			</span>
 																		</Link>
 																	</SidebarMenuButton>
-																	<DropdownMenu>
+																	<DropdownMenu modal={false}>
 																		<DropdownMenuTrigger asChild>
 																			<SidebarMenuAction
 																				disabled={isDocPending} // Disable trigger if pending
@@ -435,8 +392,9 @@ export function MinimalIntegrationSidebar({ documents = [] as Document[] }) {
 																			</DropdownMenuItem>
 																			<DropdownMenuSeparator />
 																			<DropdownMenuItem
-																				onClick={() =>
-																					handleDelete(doc.id, doc.name)
+																				onClick={() => {
+																					openDeleteDialog(doc.id, doc.name);
+																				}	
 																				}
 																				disabled={isDeleting}
 																				className="flex cursor-pointer items-center gap-2"

@@ -94,10 +94,10 @@ export default function RootLayout({
 				className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
 			>
 				<PleaseStarUsOnGitHub />
-				<Providers>
-					<TourProvider>{children}</TourProvider>
-					<Toaster />
-				</Providers>
+					<Providers>
+						<TourProvider>{children}</TourProvider>
+						<Toaster />
+					</Providers>
 				<Analytics />
 			</body>
 		</html>

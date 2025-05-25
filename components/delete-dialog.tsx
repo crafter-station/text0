@@ -9,13 +9,15 @@ import {
 	AlertDialogTitle,
 } from "./ui/alert-dialog";
 
+import { Loader2 } from "lucide-react";
+
 export function DeleteDialog() {
-	const { documentName, closeDeleteDialog, showDeleteDialog } =
-		useDocumentContext();
+	const { documentName, closeDeleteDialog, showDeleteDialog, handleDelete } = useDocumentContext();
+	
 
 	return (
-		<AlertDialog open={showDeleteDialog}>
-			<AlertDialogContent>
+		<AlertDialog open={showDeleteDialog} >
+			<AlertDialogContent >
 				<AlertDialogTitle>
 					Are you sure you want to delete "{documentName}"?
 				</AlertDialogTitle>
@@ -24,11 +26,15 @@ export function DeleteDialog() {
 					undone.
 				</AlertDialogDescription>
 				<div className="flex justify-end gap-4">
-					<AlertDialogCancel asChild onClick={(e) => e.stopPropagation()}>
-						<button type="button">Cancel</button>
+					<AlertDialogCancel asChild onClick={() => closeDeleteDialog()}>
+						<button type="button">
+							Cancel
+						</button>
 					</AlertDialogCancel>
-					<AlertDialogAction asChild onClick={() => closeDeleteDialog()}>
-						<button type="button">Delete Document</button>
+					<AlertDialogAction className="bg-red-900/80 hover:bg-red-900/100" asChild onClick={() => handleDelete()}>
+						<button>
+							Delete Document
+						</button>
 					</AlertDialogAction>
 				</div>
 			</AlertDialogContent>
