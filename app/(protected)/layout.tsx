@@ -1,7 +1,6 @@
 import { MinimalIntegrationSidebar } from "@/components/integration-sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { getSecureUser } from "@/lib/auth/server";
-import { DocumentContextProvider } from "../context/documentContext";
 import {
 	DOCUMENT_KEY,
 	type Document,
@@ -10,6 +9,7 @@ import {
 } from "@/lib/redis";
 import { redirect } from "next/navigation";
 import { AnnouncementBarWrapper } from "../components/announcement-bar";
+import { DocumentContextProvider } from "../context/documentContext";
 
 export default async function ProtectedLayout({
 	children,

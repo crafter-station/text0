@@ -10,7 +10,8 @@ import {
 } from "./ui/alert-dialog";
 
 export function DeleteDialog() {
-	const { documentName, closeDeleteDialog, showDeleteDialog } = useDocumentContext();
+	const { documentName, closeDeleteDialog, showDeleteDialog } =
+		useDocumentContext();
 
 	return (
 		<AlertDialog open={showDeleteDialog}>
