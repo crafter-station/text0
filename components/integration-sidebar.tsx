@@ -1,11 +1,22 @@
 "use client";
 
-import { createDocument } from "@/actions/docs";
+import {
+	createDocument,
+	deleteDocument,
+	getDocumentContentForExport,
+} from "@/actions/docs";
 import {
 	Collapsible,
 	CollapsibleContent,
 	CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { DiscordIcon } from "@/components/ui/icons/discord";
 import { GithubIcon } from "@/components/ui/icons/github";
 import { GmailIcon } from "@/components/ui/icons/gmail";
@@ -22,36 +33,43 @@ import {
 	SidebarGroup,
 	SidebarHeader,
 	SidebarMenu,
+	SidebarMenuAction,
 	SidebarMenuButton,
 	SidebarMenuItem,
 	SidebarRail,
 	SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { downloadFile } from "@/lib/download";
 import { TOUR_STEP_IDS } from "@/lib/tour-constants";
 import { cn } from "@/lib/utils";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import {
 	Check,
 	ChevronDown,
+	Download,
 	FileText,
 	FolderOpen,
 	LayoutGrid,
+	Loader2,
 	LogIn,
 	Merge,
+	MoreHorizontal,
 	PanelRight,
 	Plus,
 	Settings,
+	Trash2,
 	X,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import * as React from "react";
 import { toast } from "sonner";
 import { CommandMenu } from "./command-menu";
 import { Input } from "./ui/input";
 import { ScrollArea } from "./ui/scroll-area";
+import useDocumentContext from "@/app/context/documentContext";
 
 interface Document {
 	id: string;
@@ -71,6 +89,13 @@ export function MinimalIntegrationSidebar({ documents = [] as Document[] }) {
 	);
 	const pathname = usePathname();
 
+	const {openDeleteDialog,
+		   pendingDocId,
+		   isDeleting,
+		   isExporting,
+		   handleExport,	
+		} = useDocumentContext()
+
 	useEffect(() => {
 		if (state?.success && state.data?.documentId) {
 			toast.success("Document created successfully");
@@ -81,6 +106,10 @@ export function MinimalIntegrationSidebar({ documents = [] as Document[] }) {
 			toast.error(state.error);
 		}
 	}, [state, router]);
+
+		
+
+	
 
 	const integrations = [
 		{ name: "GitHub", icon: GithubIcon, link: "/integrations/github" },
@@ -299,28 +328,91 @@ export function MinimalIntegrationSidebar({ documents = [] as Document[] }) {
 														</SidebarMenuButton>
 													)}
 												</div>
-												{documents.map((doc) => (
-													<div
-														key={doc.id}
-														className="ml-4 border-border border-l border-dashed px-2 group-data-[collapsible=icon]:ml-0 group-data-[collapsible=icon]:px-0"
-													>
-														<SidebarMenuButton
-															asChild
-															tooltip={doc.name}
-															data-active={
-																pathname.split("/").at(-1) === doc.id
-															}
-															className="flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-muted-foreground text-sm hover:bg-accent hover:text-accent-foreground group-data-[collapsible=icon]:justify-center"
-														>
-															<Link href={`/docs/${doc.id}`}>
-																<FileText className="h-4 w-4 shrink-0" />
-																<span className="truncate group-data-[collapsible=icon]:hidden">
-																	{doc.name}
-																</span>
-															</Link>
-														</SidebarMenuButton>
-													</div>
-												))}
+												<ul>
+													{documents.map((doc) => {
+														const isDocPending = pendingDocId === doc.id;
+														const isDocBeingDeleted =
+															isDocPending && isDeleting;
+														const isDocBeingExported =
+															isDocPending && isExporting;
+														return (
+															<div
+																key={doc.id}
+																className="ml-4 border-border border-l border-dashed px-2 group-data-[collapsible=icon]:ml-0 group-data-[collapsible=icon]:px-0"
+															>
+																<SidebarMenuItem>
+																	<SidebarMenuButton
+																		asChild
+																		tooltip={doc.name}
+																		data-active={
+																			pathname.split("/").at(-1) === doc.id
+																		}
+																		className="flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-muted-foreground text-sm hover:bg-accent hover:text-accent-foreground group-data-[collapsible=icon]:justify-center"
+																		style={{ opacity: isDocPending ? 0.7 : 1 }}
+																	>
+																		<Link
+																			href={`/docs/${doc.id}`}
+																			className="flex w-full items-center gap-2"
+																		>
+																			<FileText className="h-4 w-4 shrink-0" />
+																			<span className="max-w-40 truncate group-data-[collapsible=icon]:hidden">
+																				{doc.name}
+																			</span>
+																		</Link>
+																	</SidebarMenuButton>
+																	<DropdownMenu modal={false}>
+																		<DropdownMenuTrigger asChild>
+																			<SidebarMenuAction
+																				disabled={isDocPending} // Disable trigger if pending
+																			>
+																				{isDocPending ? (
+																					<Loader2 className="h-4 w-4 animate-spin" />
+																				) : (
+																					<MoreHorizontal className="h-4 w-4" />
+																				)}
+																			</SidebarMenuAction>
+																		</DropdownMenuTrigger>
+																		<DropdownMenuContent
+																			side="right"
+																			align="start"
+																		>
+																			<DropdownMenuItem
+																				onClick={() =>
+																					handleExport(doc.id, doc.name)
+																				}
+																				disabled={isExporting}
+																				className="flex cursor-pointer items-center gap-2"
+																			>
+																				{isDocBeingExported ? (
+																					<Loader2 className="h-4 w-4 animate-spin" />
+																				) : (
+																					<Download className="h-4 w-4" />
+																				)}
+																				<span>Export Markdown</span>
+																			</DropdownMenuItem>
+																			<DropdownMenuSeparator />
+																			<DropdownMenuItem
+																				onClick={() => {
+																					openDeleteDialog(doc.id, doc.name);
+																				}	
+																				}
+																				disabled={isDeleting}
+																				className="flex cursor-pointer items-center gap-2"
+																			>
+																				{isDocBeingDeleted ? (
+																					<Loader2 className="h-4 w-4 animate-spin" />
+																				) : (
+																					<Trash2 className="h-4 w-4" />
+																				)}
+																				<span>Delete Document</span>
+																			</DropdownMenuItem>
+																		</DropdownMenuContent>
+																	</DropdownMenu>
+																</SidebarMenuItem>
+															</div>
+														);
+													})}
+												</ul>
 											</div>
 										</ScrollArea>
 									</CollapsibleContent>

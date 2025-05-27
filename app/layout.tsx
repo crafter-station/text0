@@ -77,7 +77,7 @@ export const metadata: Metadata = {
 	},
 	themeColor: "#000000",
 	icons: {
-		icon: "/favicon.ico",
+		icon: "/icon.svg",
 		apple: "/apple-touch-icon.png",
 	},
 	category: "technology",
@@ -94,10 +94,10 @@ export default function RootLayout({
 				className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
 			>
 				<PleaseStarUsOnGitHub />
-				<Providers>
-					<TourProvider>{children}</TourProvider>
-					<Toaster />
-				</Providers>
+					<Providers>
+						<TourProvider>{children}</TourProvider>
+						<Toaster />
+					</Providers>
 				<Analytics />
 			</body>
 		</html>
