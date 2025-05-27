@@ -116,7 +116,7 @@ export default async function LandingPage() {
 						</a>
 						<div className="animate-pulse rounded-full bg-[#5865F2] p-1">
 							<a
-								href="https://discord.gg/7MfrzBAX"
+								href="https://discord.gg/W5sRKxqxH8"
 								target="_blank"
 								rel="noopener noreferrer"
 								className="hover:text-foreground"

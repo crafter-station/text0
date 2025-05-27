@@ -58,13 +58,13 @@ export function PleaseStarUsOnGitHub() {
 					animate={
 						isHovered
 							? {
-									scale: 1.2,
-									rotate: 360,
-								}
+								scale: 1.2,
+								rotate: 360,
+							}
 							: {
-									scale: 1,
-									rotate: 0,
-								}
+								scale: 1,
+								rotate: 0,
+							}
 					}
 					transition={{ duration: 0.3 }}
 				>
@@ -75,11 +75,11 @@ export function PleaseStarUsOnGitHub() {
 				animate={
 					isHovered
 						? {
-								scale: 1.05,
-							}
+							scale: 1.05,
+						}
 						: {
-								scale: 1,
-							}
+							scale: 1,
+						}
 				}
 				transition={{ duration: 0.2 }}
 				className="font-medium text-xs"
@@ -90,13 +90,13 @@ export function PleaseStarUsOnGitHub() {
 				animate={
 					isHovered
 						? {
-								scale: 1.1,
-								rotate: [0, -10, 10, 0],
-							}
+							scale: 1.1,
+							rotate: [0, -10, 10, 0],
+						}
 						: {
-								scale: 1,
-								rotate: 0,
-							}
+							scale: 1,
+							rotate: 0,
+						}
 				}
 				transition={{ duration: 0.3 }}
 			>
@@ -167,11 +167,11 @@ export function PleaseStarUsOnGitHub() {
 						animate={
 							buttonHovered
 								? {
-										scale: 1.02,
-									}
+									scale: 1.02,
+								}
 								: {
-										scale: 1,
-									}
+									scale: 1,
+								}
 						}
 						transition={{ duration: 0.2 }}
 					>
@@ -180,13 +180,13 @@ export function PleaseStarUsOnGitHub() {
 								animate={
 									buttonHovered
 										? {
-												rotate: [0, -10, 10, -10, 0],
-												scale: [1, 1.2, 1.2, 1.2, 1],
-											}
+											rotate: [0, -10, 10, -10, 0],
+											scale: [1, 1.2, 1.2, 1.2, 1],
+										}
 										: {
-												rotate: 0,
-												scale: 1,
-											}
+											rotate: 0,
+											scale: 1,
+										}
 								}
 								transition={{ duration: 0.5 }}
 							>
@@ -196,11 +196,11 @@ export function PleaseStarUsOnGitHub() {
 								animate={
 									buttonHovered
 										? {
-												scale: 1.05,
-											}
+											scale: 1.05,
+										}
 										: {
-												scale: 1,
-											}
+											scale: 1,
+										}
 								}
 								transition={{ duration: 0.5 }}
 							>
@@ -253,7 +253,7 @@ export function PleaseStarUsOnGitHub() {
 						</a>
 						<div className="animate-pulse rounded-full bg-[#5865F2] p-1">
 							<a
-								href="https://discord.gg/7MfrzBAX"
+								href="https://discord.gg/W5sRKxqxH8"
 								target="_blank"
 								rel="noopener noreferrer"
 								className="hover:text-foreground"
