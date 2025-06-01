@@ -18,7 +18,7 @@ interface DocumentContextType {
 	handleExport: (docId: string, docName: string) => Promise<void>;
 	handleDelete: () => Promise<void>;
 	documentName: string | null;
-	openDeleteDialog: (docId:string, docName:string) => void;
+	openDeleteDialog: (docId: string, docName: string) => void;
 	closeDeleteDialog: () => void;
 	showDeleteDialog: boolean;
 }
@@ -37,11 +37,10 @@ export function DocumentContextProvider({ children }: { children: ReactNode }) {
 	const router = useRouter();
 
 	const handleDelete = async () => {
-		setShowDeleteDialog(false);	
+		setShowDeleteDialog(false);
 		startDeleteTransition(async () => {
 			try {
-				
-				if(!pendingDocId || !documentName) throw TypeError
+				if (!pendingDocId || !documentName) throw TypeError;
 				const result = await deleteDocument(pendingDocId);
 				if (result.success) {
 					toast.success(`Document "${documentName}" deleted successfully`);
@@ -84,7 +83,7 @@ export function DocumentContextProvider({ children }: { children: ReactNode }) {
 		});
 	};
 
-	function openDeleteDialog(docId:string, docName:string) {
+	function openDeleteDialog(docId: string, docName: string) {
 		setDocumentName(docName);
 		setPendingDocId(docId);
 		setShowDeleteDialog(true);

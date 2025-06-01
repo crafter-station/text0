@@ -5,7 +5,7 @@
   Text0
   <br/>
   <br/>
-  <a href="https://discord.gg/W5sRKxqxH8" target="_blank">
+  <a href="https://discord.gg/HZA8zwNr9v" target="_blank">
     <img src="https://img.shields.io/badge/Join%20Our%20Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Join Discord"/>
   </a>
   <br/>

@@ -5,6 +5,7 @@ import { TextScramble } from "@/components/text-scramble";
 import { DiscordIcon } from "@/components/ui/icons/discord";
 import { GithubIcon } from "@/components/ui/icons/github";
 import { XIcon } from "@/components/ui/icons/x-icon";
+import { DISCORD_INVITATION_PERMALINK } from "@/lib/discord/invitation";
 import Image from "next/image";
 import { AnnouncementBarWrapper } from "./components/announcement-bar/AnnouncementBarWrapper";
 
@@ -116,7 +117,7 @@ export default async function LandingPage() {
 						</a>
 						<div className="animate-pulse rounded-full bg-[#5865F2] p-1">
 							<a
-								href="https://discord.gg/W5sRKxqxH8"
+								href={DISCORD_INVITATION_PERMALINK}
 								target="_blank"
 								rel="noopener noreferrer"
 								className="hover:text-foreground"

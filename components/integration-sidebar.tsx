@@ -1,10 +1,7 @@
 "use client";
 
-import {
-	createDocument,
-	deleteDocument,
-	getDocumentContentForExport,
-} from "@/actions/docs";
+import { createDocument } from "@/actions/docs";
+import useDocumentContext from "@/app/context/documentContext";
 import {
 	Collapsible,
 	CollapsibleContent,
@@ -40,7 +37,6 @@ import {
 	SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { downloadFile } from "@/lib/download";
 import { TOUR_STEP_IDS } from "@/lib/tour-constants";
 import { cn } from "@/lib/utils";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
@@ -63,13 +59,12 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState, useTransition } from "react";
+import { useEffect, useState } from "react";
 import * as React from "react";
 import { toast } from "sonner";
 import { CommandMenu } from "./command-menu";
 import { Input } from "./ui/input";
 import { ScrollArea } from "./ui/scroll-area";
-import useDocumentContext from "@/app/context/documentContext";
 
 interface Document {
 	id: string;
@@ -89,12 +84,13 @@ export function MinimalIntegrationSidebar({ documents = [] as Document[] }) {
 	);
 	const pathname = usePathname();
 
-	const {openDeleteDialog,
-		   pendingDocId,
-		   isDeleting,
-		   isExporting,
-		   handleExport,	
-		} = useDocumentContext()
+	const {
+		openDeleteDialog,
+		pendingDocId,
+		isDeleting,
+		isExporting,
+		handleExport,
+	} = useDocumentContext();
 
 	useEffect(() => {
 		if (state?.success && state.data?.documentId) {
@@ -106,10 +102,6 @@ export function MinimalIntegrationSidebar({ documents = [] as Document[] }) {
 			toast.error(state.error);
 		}
 	}, [state, router]);
-
-		
-
-	
 
 	const integrations = [
 		{ name: "GitHub", icon: GithubIcon, link: "/integrations/github" },
@@ -394,8 +386,7 @@ export function MinimalIntegrationSidebar({ documents = [] as Document[] }) {
 																			<DropdownMenuItem
 																				onClick={() => {
 																					openDeleteDialog(doc.id, doc.name);
-																				}	
-																				}
+																				}}
 																				disabled={isDeleting}
 																				className="flex cursor-pointer items-center gap-2"
 																			>

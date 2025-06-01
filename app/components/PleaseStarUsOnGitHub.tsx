@@ -13,6 +13,7 @@ import { GithubIcon } from "@/components/ui/icons/github";
 import { T0Logo } from "@/components/ui/icons/t0-logo";
 import { XIcon } from "@/components/ui/icons/x-icon";
 import { useMediaQuery } from "@/hooks/use-media-query";
+import { DISCORD_INVITATION_PERMALINK } from "@/lib/discord/invitation";
 import { StarIcon } from "lucide-react";
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
@@ -253,7 +254,7 @@ export function PleaseStarUsOnGitHub() {
 						</a>
 						<div className="animate-pulse rounded-full bg-[#5865F2] p-1">
 							<a
-								href="https://discord.gg/W5sRKxqxH8"
+								href={DISCORD_INVITATION_PERMALINK}
 								target="_blank"
 								rel="noopener noreferrer"
 								className="hover:text-foreground"

@@ -1,3 +1,4 @@
+import { DeleteDialog } from "@/components/delete-dialog";
 import { MinimalIntegrationSidebar } from "@/components/integration-sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { getSecureUser } from "@/lib/auth/server";
@@ -10,7 +11,6 @@ import {
 import { redirect } from "next/navigation";
 import { AnnouncementBarWrapper } from "../components/announcement-bar";
 import { DocumentContextProvider } from "../context/documentContext";
-import { DeleteDialog } from "@/components/delete-dialog";
 
 export default async function ProtectedLayout({
 	children,
@@ -42,20 +42,19 @@ export default async function ProtectedLayout({
 
 	return (
 		<DocumentContextProvider>
-		<SidebarProvider
-			defaultOpen={true}
-			className="grid h-dvh grid-rows-[auto_1fr]"
-		>
-			<AnnouncementBarWrapper />
-			<div className="row-span-2 flex">
-				
+			<SidebarProvider
+				defaultOpen={true}
+				className="grid h-dvh grid-rows-[auto_1fr]"
+			>
+				<AnnouncementBarWrapper />
+				<div className="row-span-2 flex">
 					<MinimalIntegrationSidebar documents={documents} />
-					<main className="flex flex-1 overflow-auto relative">
+					<main className="relative flex flex-1 overflow-auto">
 						<div className="grid flex-1">{children}</div>
 					</main>
-					<DeleteDialog/>
-			</div>
-		</SidebarProvider>
+					<DeleteDialog />
+				</div>
+			</SidebarProvider>
 		</DocumentContextProvider>
 	);
 }
