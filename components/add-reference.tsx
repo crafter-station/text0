@@ -21,8 +21,11 @@ import {
 } from "@/components/ui/file-upload";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import type { Reference } from "@/lib/redis";
 import { uploadFiles } from "@/lib/uploadthing";
+import { useQueryClient } from "@tanstack/react-query";
 import { Upload, X } from "lucide-react";
+import { useRouter } from "next/navigation";
 import * as React from "react";
 import { useActionState } from "react";
 import { toast } from "sonner";
@@ -35,12 +38,50 @@ export function AddReference({
 }: Readonly<{
 	children?: React.ReactNode;
 }>) {
+	const queryClient = useQueryClient();
+	const router = useRouter();
 	const [isUploading, setIsUploading] = React.useState(false);
 	const [files, setFiles] = React.useState<File[]>([]);
 	const [open, setOpen] = React.useState(false);
 	const [url, setUrl] = React.useState("");
 	const [state, formAction, isPendingAddWebsiteReferenceAction] =
 		useActionState(addWebsiteReference, undefined);
+
+	const syncReferenceViews = React.useCallback(
+		async (referenceId?: string) => {
+			await queryClient.invalidateQueries({ queryKey: ["references"] });
+			router.refresh();
+
+			if (!referenceId) {
+				return;
+			}
+
+			for (let attempt = 0; attempt < 30; attempt++) {
+				await new Promise((resolve) => setTimeout(resolve, 2000));
+
+				const response = await fetch("/api/references", { cache: "no-store" });
+				if (!response.ok) {
+					return;
+				}
+
+				const references = (await response.json()) as Reference[];
+				const updatedReference = references.find(
+					(reference) => reference.id === referenceId,
+				);
+
+				if (!updatedReference) {
+					continue;
+				}
+
+				if (updatedReference.processed) {
+					await queryClient.invalidateQueries({ queryKey: ["references"] });
+					router.refresh();
+					return;
+				}
+			}
+		},
+		[queryClient, router],
+	);
 
 	// Handle server action state changes
 	React.useEffect(() => {
@@ -52,8 +93,9 @@ export function AddReference({
 			toast.success("Reference added successfully");
 			setUrl("");
 			setOpen(false);
+			void syncReferenceViews(state.data?.referenceId);
 		}
-	}, [state]);
+	}, [state, syncReferenceViews]);
 
 	const onUpload = React.useCallback(
 		async (
@@ -91,6 +133,11 @@ export function AddReference({
 					),
 				});
 
+				const uploadedReferenceId = (
+					res as Array<{ serverData?: { referenceId?: string } }>
+				)[0]?.serverData?.referenceId;
+				void syncReferenceViews(uploadedReferenceId);
+
 				// Close the dialog after 2 seconds
 				setTimeout(() => {
 					setOpen(false);
@@ -114,7 +161,7 @@ export function AddReference({
 				setIsUploading(false);
 			}
 		},
-		[],
+		[syncReferenceViews],
 	);
 
 	const onFileReject = React.useCallback((file: File, message: string) => {

@@ -12,7 +12,7 @@ import { useSelectedReferences } from "@/hooks/use-selected-references";
 import type { Reference } from "@/lib/redis";
 import { AlertCircle, CheckCircle, ExternalLink, Loader2 } from "lucide-react";
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 
 export function ReferenceSelector() {
@@ -23,6 +23,7 @@ export function ReferenceSelector() {
 		doc_id as string,
 	);
 	const [recentlyAdded, setRecentlyAdded] = useState<string[]>([]);
+	const knownReferenceIdsRef = useRef<Set<string>>(new Set());
 
 	// Monitor localStorage for changes in references (when a new reference is added)
 	useEffect(() => {
@@ -46,17 +47,17 @@ export function ReferenceSelector() {
 	useEffect(() => {
 		if (!references || !Array.isArray(references)) return;
 
-		// Compare references with the previously rendered list
+		if (knownReferenceIdsRef.current.size === 0) {
+			knownReferenceIdsRef.current = new Set(references.map((ref) => ref.id));
+			return;
+		}
+
+		// Compare references with the previously seen list
 		const newReferences = references
-			.filter((ref) => {
-				// Consider a reference new if it was added in the last 5 seconds
-				const uploadTime = ref.uploadedAt
-					? new Date(ref.uploadedAt).getTime()
-					: 0;
-				const now = Date.now();
-				return now - uploadTime < 5000;
-			})
+			.filter((ref) => !knownReferenceIdsRef.current.has(ref.id))
 			.map((ref) => ref.id);
+
+		knownReferenceIdsRef.current = new Set(references.map((ref) => ref.id));
 
 		// If we found new references
 		if (newReferences.length > 0) {
@@ -97,7 +98,8 @@ export function ReferenceSelector() {
 				<TableBody>
 					{(references ?? []).map((reference: Reference) => {
 						const processing = processingStatus[reference.id];
-						const isProcessing = processing?.isProcessing;
+						const isProcessing =
+							processing?.isProcessing ?? !reference.processed;
 						const progress = processing?.progress;
 						const hasError = !!processing?.error;
 
@@ -141,7 +143,7 @@ export function ReferenceSelector() {
 											<div className="flex items-center text-muted-foreground text-xs">
 												<Loader2 className="mr-1.5 h-3 w-3 animate-spin" />
 												<span className="font-medium text-[10px] uppercase tracking-wide opacity-80">
-													{processing.status || "Processing..."}
+													{processing?.status || "Processing..."}
 												</span>
 											</div>
 											{typeof progress === "number" && (
@@ -165,7 +167,7 @@ export function ReferenceSelector() {
 									)}
 
 									{/* Completed indicator */}
-									{!isProcessing && !hasError && processing && (
+									{!isProcessing && !hasError && reference.processed && (
 										<div className="mt-1 flex items-center text-primary text-xs">
 											<CheckCircle className="mr-1.5 h-3 w-3" />
 											<span className="font-medium text-[10px] uppercase tracking-wide">
