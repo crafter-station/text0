@@ -1,5 +1,6 @@
 import { getSecureSession } from "@/lib/auth/server";
 import { vector } from "@/lib/vector";
+import { getWritingStylePrompt } from "@/lib/writing-styles";
 import {
 	type Message,
 	type StreamTextOnErrorCallback,
@@ -14,6 +15,7 @@ export const maxDuration = 60; // Allow longer duration for local models
 
 const SYSTEM_PROMPT = (
 	context: string,
+	writingStylePrompt: string,
 ) => `Your name is text0. You are an AI writing assistant. When asked to modify text, you should:
 1. Analyze the text and understand its context and purpose
 2. Make the requested changes while preserving the original meaning
@@ -22,7 +24,11 @@ const SYSTEM_PROMPT = (
 5. Use the context provided in <context> tags. Use this as a knowledge base to help you answer the questions or tasks.
 <context>
 ${context}
-</context>
+</context>${
+	writingStylePrompt
+		? `\n\nWhen writing or modifying text, follow this writing style:\n${writingStylePrompt}`
+		: ""
+}
 
 Example:
 User: Make this text more professional: "Hey there! Just wanted to check in"
@@ -30,7 +36,7 @@ Assistant: UPDATED_CONTENT: Dear [Name], I hope this message finds you well. I a
 
 export async function POST(req: Request) {
 	try {
-		const { messages, model, references } = await req.json();
+		const { messages, model, references, writingStyle } = await req.json();
 
 		const session = await getSecureSession();
 
@@ -74,7 +80,7 @@ export async function POST(req: Request) {
 
 		const result = streamText({
 			model: ollama(ollamaModel),
-			system: SYSTEM_PROMPT(context),
+			system: SYSTEM_PROMPT(context, getWritingStylePrompt(writingStyle)),
 			messages,
 			temperature: 0.7,
 			maxTokens: 2000,

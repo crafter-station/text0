@@ -15,6 +15,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { useModel } from "@/hooks/use-model";
 import { useSelectedReferences } from "@/hooks/use-selected-references";
+import { useWritingStyle } from "@/hooks/use-writing-style";
 import { TOUR_STEP_IDS } from "@/lib/tour-constants";
 import { cn } from "@/lib/utils";
 import { useChat } from "@ai-sdk/react";
@@ -22,6 +23,7 @@ import { Loader2, PanelRight, Send, Upload, X } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useCallback, useEffect, useRef } from "react";
 import { ReferenceSelector } from "./reference-selector";
+import { WritingStyleSelector } from "./writing-style-selector";
 
 export interface AIChatSidebarProps {
 	content: string;
@@ -38,6 +40,7 @@ export function AIChatSidebar({
 
 	const { doc_id } = useParams();
 	const [model] = useModel();
+	const [writingStyle] = useWritingStyle();
 	const { getSelectedReferences } = useSelectedReferences(doc_id as string);
 
 	// Use Ollama-specific endpoint for local models
@@ -58,6 +61,7 @@ export function AIChatSidebar({
 		api: chatApi,
 		body: {
 			model,
+			writingStyle,
 			references: getSelectedReferences(),
 		},
 		onFinish: (message) => {
@@ -148,7 +152,17 @@ export function AIChatSidebar({
 					>
 						<div className="space-y-2 group-data-[collapsible=icon]:space-y-1">
 							<div className="group-data-[collapsible=icon]:flex group-data-[collapsible=icon]:flex-col group-data-[collapsible=icon]:items-center group-data-[collapsible=icon]:gap-1">
-								<div className="group-data-[collapsible=icon]:hidden">
+								<div className="space-y-2 group-data-[collapsible=icon]:hidden">
+									<div className="overflow-hidden rounded-md border border-border/40">
+										<div className="flex items-center justify-between border-border/40 border-b bg-muted px-3 py-1.5">
+											<span className="font-medium text-foreground text-xs">
+												Writing style
+											</span>
+										</div>
+										<div className="p-2">
+											<WritingStyleSelector />
+										</div>
+									</div>
 									<div
 										id={TOUR_STEP_IDS.AI_REFERENCES}
 										className="overflow-hidden rounded-md border border-border/40"
