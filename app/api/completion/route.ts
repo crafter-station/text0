@@ -4,7 +4,7 @@ import { type LanguageModelV1, streamText } from "ai";
 import { anthropic } from "@ai-sdk/anthropic";
 import { google } from "@ai-sdk/google";
 import { groq } from "@ai-sdk/groq";
-import { openai } from "@ai-sdk/openai";
+import { createOpenAI, openai } from "@ai-sdk/openai";
 import { xai } from "@ai-sdk/xai";
 import { ollama } from "ollama-ai-provider";
 
@@ -12,6 +12,11 @@ import { getSecureSession } from "@/lib/auth/server";
 import type { NextRequest } from "next/server";
 
 export const maxDuration = 30;
+
+const minimax = createOpenAI({
+	baseURL: "https://api.minimax.io/v1",
+	apiKey: process.env.MINIMAX_API_KEY,
+});
 
 export async function POST(request: NextRequest) {
 	try {
@@ -39,6 +44,8 @@ export async function POST(request: NextRequest) {
 			model = google("gemini-2.0-flash-001");
 		} else if (_model === "gemini-2.0-flash-lite-preview-02-05") {
 			model = google("gemini-2.0-flash-lite-preview-02-05");
+		} else if (_model === "MiniMax-M3") {
+			model = minimax("MiniMax-M3");
 		} else if (_model?.startsWith("ollama/")) {
 			const ollamaModel = _model.replace("ollama/", "");
 			model = ollama(ollamaModel);

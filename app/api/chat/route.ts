@@ -2,7 +2,7 @@ import { getSecureSession } from "@/lib/auth/server";
 import { vector } from "@/lib/vector";
 import { anthropic } from "@ai-sdk/anthropic";
 import { google } from "@ai-sdk/google";
-import { openai } from "@ai-sdk/openai";
+import { createOpenAI, openai } from "@ai-sdk/openai";
 import { xai } from "@ai-sdk/xai";
 import {
 	type Message,
@@ -17,6 +17,11 @@ import { NextResponse } from "next/server";
 export const runtime = "edge";
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
+
+const minimax = createOpenAI({
+	baseURL: "https://api.minimax.io/v1",
+	apiKey: process.env.MINIMAX_API_KEY,
+});
 
 const SYSTEM_PROMPT = (
 	context: string,
@@ -125,6 +130,11 @@ export async function POST(req: Request) {
 		} else if (model?.startsWith("grok-")) {
 			result = await streamText({
 				model: xai(model),
+				...streamOptions,
+			});
+		} else if (model === "MiniMax-M3") {
+			result = await streamText({
+				model: minimax(model),
 				...streamOptions,
 			});
 		} else {

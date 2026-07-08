@@ -18,6 +18,12 @@ export const models = [
 		component: "xai",
 	},
 	{
+		id: "MiniMax-M3",
+		name: "MiniMax M3",
+		description: "Long-context model for writing and autocomplete",
+		component: "minimax",
+	},
+	{
 		id: "claude-3-5-sonnet-latest",
 		name: "Claude 3.5 Sonnet",
 		description: "Advanced model for nuanced and detailed writing",
