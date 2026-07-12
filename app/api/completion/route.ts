@@ -14,7 +14,7 @@ import type { NextRequest } from "next/server";
 export const maxDuration = 30;
 
 const minimax = createOpenAI({
-	baseURL: "https://api.minimax.io/v1",
+	baseURL: process.env.MINIMAX_BASE_URL || "https://api.minimax.io/v1",
 	apiKey: process.env.MINIMAX_API_KEY,
 });
 
@@ -44,8 +44,8 @@ export async function POST(request: NextRequest) {
 			model = google("gemini-2.0-flash-001");
 		} else if (_model === "gemini-2.0-flash-lite-preview-02-05") {
 			model = google("gemini-2.0-flash-lite-preview-02-05");
-		} else if (_model === "MiniMax-M3") {
-			model = minimax("MiniMax-M3");
+		} else if (_model?.startsWith("MiniMax-")) {
+			model = minimax(_model);
 		} else if (_model?.startsWith("ollama/")) {
 			const ollamaModel = _model.replace("ollama/", "");
 			model = ollama(ollamaModel);

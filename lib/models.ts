@@ -24,6 +24,12 @@ export const models = [
 		component: "minimax",
 	},
 	{
+		id: "MiniMax-M2.7",
+		name: "MiniMax M2.7",
+		description: "Reasoning model for writing and autocomplete",
+		component: "minimax",
+	},
+	{
 		id: "claude-3-5-sonnet-latest",
 		name: "Claude 3.5 Sonnet",
 		description: "Advanced model for nuanced and detailed writing",

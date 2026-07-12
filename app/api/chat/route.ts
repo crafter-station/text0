@@ -19,7 +19,7 @@ export const runtime = "edge";
 export const maxDuration = 30;
 
 const minimax = createOpenAI({
-	baseURL: "https://api.minimax.io/v1",
+	baseURL: process.env.MINIMAX_BASE_URL || "https://api.minimax.io/v1",
 	apiKey: process.env.MINIMAX_API_KEY,
 });
 
@@ -132,7 +132,7 @@ export async function POST(req: Request) {
 				model: xai(model),
 				...streamOptions,
 			});
-		} else if (model === "MiniMax-M3") {
+		} else if (model?.startsWith("MiniMax-")) {
 			result = await streamText({
 				model: minimax(model),
 				...streamOptions,
