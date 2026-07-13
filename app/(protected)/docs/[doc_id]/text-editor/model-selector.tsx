@@ -3,6 +3,7 @@
 import { AnthropicLogo } from "@/components/ui/anthropic-logo";
 import { GoogleLogo } from "@/components/ui/google-logo";
 import { LlamaLogo } from "@/components/ui/llama-logo";
+import { MiniMaxLogo } from "@/components/ui/minimax-logo";
 import { OpenAILogo } from "@/components/ui/openai-logo";
 import {
 	Select,
@@ -33,6 +34,8 @@ function ModelLogo({ model }: Readonly<{ model: (typeof models)[0] }>) {
 			return <XAILogo {...logoProps} />;
 		case "llama":
 			return <LlamaLogo {...logoProps} />;
+		case "minimax":
+			return <MiniMaxLogo {...logoProps} />;
 		default:
 			return null;
 	}

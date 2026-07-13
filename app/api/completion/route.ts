@@ -1,10 +1,11 @@
 import { vector } from "@/lib/vector";
 import { type LanguageModelV1, streamText } from "ai";
 
+import { minimax } from "@/lib/minimax";
 import { anthropic } from "@ai-sdk/anthropic";
 import { google } from "@ai-sdk/google";
 import { groq } from "@ai-sdk/groq";
-import { createOpenAI, openai } from "@ai-sdk/openai";
+import { openai } from "@ai-sdk/openai";
 import { xai } from "@ai-sdk/xai";
 import { ollama } from "ollama-ai-provider";
 
@@ -12,11 +13,6 @@ import { getSecureSession } from "@/lib/auth/server";
 import type { NextRequest } from "next/server";
 
 export const maxDuration = 30;
-
-const minimax = createOpenAI({
-	baseURL: process.env.MINIMAX_BASE_URL || "https://api.minimax.io/v1",
-	apiKey: process.env.MINIMAX_API_KEY,
-});
 
 export async function POST(request: NextRequest) {
 	try {
