@@ -68,6 +68,35 @@ bun install
 bun dev
 ```
 
+### Environment variables
+
+Copy `.env.example` to `.env.local` and fill in the values below. The
+application needs the required services to boot and serve requests.
+
+| Variable | Required | Where to get it | What breaks without it |
+|---|---|---|---|
+| `CLERK_SECRET_KEY` | Yes | [Clerk Dashboard](https://dashboard.clerk.com) | Authentication and protected routes fail |
+| `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` | Yes | [Clerk Dashboard](https://dashboard.clerk.com) | Clerk cannot initialize in the browser |
+| `UPSTASH_REDIS_REST_URL` | Yes | [Upstash Console](https://console.upstash.com) | Redis-backed docs and state fail |
+| `UPSTASH_REDIS_REST_TOKEN` | Yes | [Upstash Console](https://console.upstash.com) | Redis-backed docs and state fail |
+| `UPSTASH_VECTOR_REST_URL` | Yes | [Upstash Console](https://console.upstash.com) | Vector-backed autocomplete fails |
+| `UPSTASH_VECTOR_REST_TOKEN` | Yes | [Upstash Console](https://console.upstash.com) | Vector-backed autocomplete fails |
+| `UPLOADTHING_TOKEN` | Yes | [UploadThing](https://uploadthing.com) | File uploads fail |
+| `TRIGGER_SECRET_KEY` | Yes | [Trigger.dev](https://trigger.dev) | Background jobs cannot run |
+| `TRIGGER_PROJECT_ID` | Yes | [Trigger.dev](https://trigger.dev) | Background jobs cannot run |
+| `NEXT_PUBLIC_APP_URL` | Yes | Your local or deployed origin | Redirects and upload callbacks use the wrong URL |
+
+Optional model providers:
+
+| Variable | Purpose |
+|---|---|
+| `OPENAI_API_KEY`, `GOOGLE_GENERATIVE_AI_API_KEY`, `XAI_API_KEY`, `GROQ_API_KEY`, `ANTHROPIC_API_KEY` | Model providers used by the AI SDK |
+| `MINIMAX_API_KEY`, `MINIMAX_API_FORMAT`, `MINIMAX_BASE_URL` | MiniMax provider |
+| `OLLAMA_BASE_URL`, `OLLAMA_UTILITY_MODEL` | Local Ollama models |
+| `FIRECRAWL_API_KEY` | Web reference crawling |
+| `ELEVENLABS_API_KEY` | Voice output |
+| `DEFAULT_USER_ID` | Local development fallback identity |
+
 ## Usage
 
 Visit [www.text0.dev](https://www.text0.dev) to access the hosted version.
