@@ -82,6 +82,9 @@ To use the local development version, navigate to `http://localhost:3000` after 
 
 ## Contributing
 
+See [CONTRIBUTING.md](CONTRIBUTING.md) for setup, Biome, Husky, and commit
+conventions.
+
 Contributions are welcome! Please feel free to:
 
 1. Open issues for bugs or feature requests
