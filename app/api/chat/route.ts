@@ -1,3 +1,4 @@
+import { atlasCloud } from "@/lib/atlascloud";
 import { getSecureSession } from "@/lib/auth/server";
 import { minimax } from "@/lib/minimax";
 import { vector } from "@/lib/vector";
@@ -114,7 +115,12 @@ export async function POST(req: Request) {
 		};
 
 		// Create stream based on model
-		if (model?.startsWith("gpt-")) {
+		if (model?.startsWith("atlascloud/")) {
+			result = await streamText({
+				model: atlasCloud(model),
+				...streamOptions,
+			});
+		} else if (model?.startsWith("gpt-")) {
 			result = await streamText({
 				model: openai(model),
 				...streamOptions,

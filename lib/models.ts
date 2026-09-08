@@ -12,6 +12,12 @@ export const models = [
 		component: "openai",
 	},
 	{
+		id: "atlascloud/openai/gpt-5.4-mini",
+		name: "GPT-5.4 Mini (Atlas Cloud)",
+		description: "OpenAI-compatible access through Atlas Cloud",
+		component: "openai",
+	},
+	{
 		id: "grok-3-fast-beta",
 		name: "Grok 3 Fast Beta",
 		description: "High-speed model with balanced performance",

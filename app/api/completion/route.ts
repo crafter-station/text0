@@ -1,6 +1,7 @@
 import { vector } from "@/lib/vector";
 import { type LanguageModelV1, streamText } from "ai";
 
+import { atlasCloud } from "@/lib/atlascloud";
 import { minimax } from "@/lib/minimax";
 import { anthropic } from "@ai-sdk/anthropic";
 import { google } from "@ai-sdk/google";
@@ -24,7 +25,9 @@ export async function POST(request: NextRequest) {
 
 		let model: LanguageModelV1;
 
-		if (_model === "gpt-4o-mini") {
+		if (_model?.startsWith("atlascloud/")) {
+			model = atlasCloud(_model);
+		} else if (_model === "gpt-4o-mini") {
 			model = openai("gpt-4o-mini");
 		} else if (_model === "grok-3-fast-beta") {
 			model = xai("grok-3-fast-beta");
