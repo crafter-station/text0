@@ -1,3 +1,4 @@
+import { atlasCloud } from "@/lib/atlascloud";
 import { openai } from "@ai-sdk/openai";
 import { streamText } from "ai";
 import { NextResponse } from "next/server";
@@ -18,7 +19,9 @@ export async function POST(req: Request) {
 		}
 
 		const result = streamText({
-			model: openai(model),
+			model: model.startsWith("atlascloud/")
+				? atlasCloud(model)
+				: openai(model),
 			system: `You are a highly skilled writing assistant focused on precise text modifications. Follow these guidelines strictly:
 
 1. ONLY return the modified text - no explanations, no prefixes, no comments

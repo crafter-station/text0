@@ -32,6 +32,13 @@ A text editor with absurdly smart autocomplete. Text0 serves as a copilot for wr
 - Voice input and output
 - Zen mode
 
+## Atlas Cloud
+
+Atlas Cloud is available as an optional OpenAI-compatible model provider. Set
+`ATLASCLOUD_API_KEY` in your environment, then select **GPT-5.4 Mini (Atlas
+Cloud)** from the model picker. Existing providers and the default model are
+unchanged.
+
 ## Tech Stack
 
 - React
