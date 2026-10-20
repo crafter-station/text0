@@ -43,7 +43,16 @@ function ModelLogo({ model }: Readonly<{ model: (typeof models)[0] }>) {
 
 export function ModelSelector() {
 	const [model, setModel] = useModel();
-	const selectedModel = models.find((m) => m.id === model);
+	const selectedModel =
+		models.find((m) => m.id === model) ??
+		(model.startsWith("MiniMax-")
+			? {
+					id: model,
+					name: model,
+					description: "Saved MiniMax model",
+					component: "minimax",
+				}
+			: undefined);
 
 	return (
 		<div className="group-data-[collapsible=icon]:w-auto [&_[data-slot=select-trigger]>svg]:group-data-[collapsible=icon]:hidden">

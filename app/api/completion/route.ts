@@ -109,7 +109,8 @@ export async function POST(request: NextRequest) {
       Your completion:
     `,
 			temperature: 0.75,
-			maxTokens: 50,
+			// Flash always thinks, and its reasoning consumes the output budget.
+			maxTokens: _model === "MiniMax-M3.1-Flash" ? 4096 : 50,
 		});
 
 		return result.toDataStreamResponse();

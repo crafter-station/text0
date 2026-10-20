@@ -18,15 +18,15 @@ export const models = [
 		component: "xai",
 	},
 	{
-		id: "MiniMax-M3",
-		name: "MiniMax M3",
-		description: "Long-context model for writing and autocomplete",
+		id: "MiniMax-M3.1-Flash",
+		name: "MiniMax M3.1 Flash",
+		description: "Fast reasoning model for writing and autocomplete",
 		component: "minimax",
 	},
 	{
-		id: "MiniMax-M2.7",
-		name: "MiniMax M2.7",
-		description: "Reasoning model for writing and autocomplete",
+		id: "MiniMax-M3",
+		name: "MiniMax M3",
+		description: "Long-context model for writing and autocomplete",
 		component: "minimax",
 	},
 	{

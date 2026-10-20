@@ -5,7 +5,12 @@ import { useEffect } from "react";
 const STORAGE_KEY = "selected-model";
 const DEFAULT_MODEL = "gpt-4o-mini";
 
-const VALID_MODELS = models.map((model) => model.id);
+function isSupportedModel(model: string) {
+	// Keep explicit MiniMax IDs usable even when they leave the ordinary picker.
+	return (
+		models.some((entry) => entry.id === model) || model.startsWith("MiniMax-")
+	);
+}
 
 function safeGetItem(key: string): string | null {
 	try {
@@ -27,7 +32,7 @@ function safeSetItem(key: string, value: string) {
 function getInitialModel() {
 	if (typeof window !== "undefined") {
 		const storedModel = safeGetItem(STORAGE_KEY);
-		if (storedModel && VALID_MODELS.includes(storedModel)) {
+		if (storedModel && isSupportedModel(storedModel)) {
 			return storedModel;
 		}
 	}
@@ -40,7 +45,7 @@ export function useModel() {
 	});
 
 	useEffect(() => {
-		if (model && VALID_MODELS.includes(model)) {
+		if (model && isSupportedModel(model)) {
 			safeSetItem(STORAGE_KEY, model);
 		}
 	}, [model]);

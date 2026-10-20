@@ -87,7 +87,8 @@ export async function POST(req: Request) {
 			system: SYSTEM_PROMPT(context, getWritingStylePrompt(writingStyle)),
 			messages,
 			temperature: 0.7,
-			maxTokens: 2000,
+			// Flash always thinks, and its reasoning consumes the output budget.
+			maxTokens: model === "MiniMax-M3.1-Flash" ? 4096 : 2000,
 			// Handle errors during streaming
 			onError: (({ error }) => {
 				console.error("Streaming error:", error);
